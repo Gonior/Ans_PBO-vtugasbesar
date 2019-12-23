@@ -6,19 +6,25 @@
 package controller;
 
 import anspbotugasbesar.AlertHelper;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Window;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.*;
+import javafx.stage.Stage;
+import javafx.scene.Node;
 import koneksi.koneksiClass;
 
 public class RegisterViewController implements Initializable {
@@ -84,7 +90,7 @@ public class RegisterViewController implements Initializable {
     }
 
     @FXML
-    private void userMasuk(ActionEvent event) throws SQLException {
+    private void userMasuk(ActionEvent event) throws SQLException, IOException {
         koneksiClass conn = new koneksiClass();
         Window owner = btnDaftarReg.getScene().getWindow();
         String user, pass;
@@ -92,12 +98,19 @@ public class RegisterViewController implements Initializable {
         pass = loginPassword.getText();
         
         if(conn.login(user,pass)) {
-            AlertHelper.showAlert(Alert.AlertType.CONFIRMATION, owner,
-                "Anda berhasil login!", 
-                "Tekan OK untuk melanjutkan");
+//            AlertHelper.showAlert(Alert.AlertType.CONFIRMATION, owner,
+//                "Anda berhasil login!", 
+//                "Tekan OK untuk melanjutkan");
             loginPassword.setText("");
             loginUsername.setText("");
-            
+            Parent fxml = FXMLLoader.load(getClass().getResource("/view/homeView.fxml"));
+            Stage primaryStage;
+            primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(fxml);
+            primaryStage.setTitle("Ans");
+            primaryStage.setScene(scene);
+            primaryStage.resizableProperty().setValue(false);
+            primaryStage.show();
         } else  {
             AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
                     "Nama pengguna atau kata sandi anda salah!");

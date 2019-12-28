@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
+
+<AnchorPane id="AnchorPane" prefHeight="644.0" prefWidth="1066.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PlayerViewController">
+   <children>
+      <VBox prefHeight="646.0" prefWidth="1060.0">
+         <children>
+            <HBox prefHeight="67.0" style="-fx-background-color: #7AC5CD;">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="75.0" prefWidth="145.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#kembaliKeLinkView" style="-fx-background-color: transparent;">
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" glyphName="ARROW_LEFT" size="3em" />
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="67.0" prefWidth="970.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#epsPrev" style="-fx-background-color: transparent;" text="Prev" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets right="30.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Segoe UI" size="21.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#epsNext" style="-fx-background-color: transparent;" text="Next" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Segoe UI" size="21.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <padding>
+                        <Insets right="40.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox fx:id="mainPlayer" prefHeight="495.0" prefWidth="1060.0">
+               <children>
+                  <WebView fx:id="webViewPlayer" prefHeight="490.0" prefWidth="1170.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" style="-fx-background-color: #7AC5CD;">
+               <children>
+                  <Label fx:id="lblJudul" text="Di sini nanti ada judul anime" textFill="WHITE">
+                     <font>
+                        <Font name="Segoe UI" size="22.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

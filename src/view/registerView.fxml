@@ -51,7 +51,7 @@
          <children>
             <HBox alignment="CENTER" style="-fx-border-color: white; -fx-border-width: 0px 0px 2px 0px;">
                <children>
-                  <FontAwesomeIcon glyphName="USER" size="1.5em" />
+                  <FontAwesomeIcon fill="WHITE" glyphName="USER" size="1.5em" text="" />
                   <TextField fx:id="loginUsername" prefHeight="45.0" promptText="nama pengguna" style="-fx-background-color: transparent; -fx-prompt-text-fill: #aeaeae; -fx-text-fill: white;" HBox.hgrow="ALWAYS">
                      <font>
                         <Font name="Segoe UI" size="16.0" />
@@ -64,7 +64,7 @@
             </HBox>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" style="-fx-border-color: white; -fx-border-width: 0px 0px 2px 0px;">
                <children>
-                  <FontAwesomeIcon glyphName="KEY" size="1.5em" />
+                  <FontAwesomeIcon fill="WHITE" glyphName="KEY" size="1.5em" />
                   <PasswordField fx:id="loginPassword" prefHeight="45.0" promptText="kata sandi" style="-fx-background-color: transparent; -fx-prompt-text-fill: #aeaeae; -fx-text-fill: white;" HBox.hgrow="ALWAYS">
                      <font>
                         <Font name="Segoe UI" size="16.0" />

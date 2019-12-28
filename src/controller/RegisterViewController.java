@@ -98,9 +98,6 @@ public class RegisterViewController implements Initializable {
         pass = loginPassword.getText();
         
         if(conn.login(user,pass)) {
-//            AlertHelper.showAlert(Alert.AlertType.CONFIRMATION, owner,
-//                "Anda berhasil login!", 
-//                "Tekan OK untuk melanjutkan");
             loginPassword.setText("");
             loginUsername.setText("");
             Parent fxml = FXMLLoader.load(getClass().getResource("/view/homeView.fxml"));

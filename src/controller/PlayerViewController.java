@@ -5,15 +5,21 @@
  */
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import javafx.stage.Stage;
 
 
 /**
@@ -45,14 +51,23 @@ public class PlayerViewController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        setPlayer(1, 1);
         strUrl = "http://localhost/player/player.php?id="+Integer.toString(idStreaming);
         WebEngine engine = webViewPlayer.getEngine();
         engine.load(strUrl);
     }
 
     @FXML
-    private void kembaliKeLinkView(ActionEvent event) {
+    private void kembaliKeLinkView(ActionEvent event) throws IOException {
+        LinkViewController linkViewController = new LinkViewController();
+        linkViewController.setContent(idAnime);
+        Parent fxml = FXMLLoader.load(getClass().getResource("/view/linkView.fxml"));
+        Stage primaryStage;
+        primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(fxml);
+        primaryStage.setTitle("Ans");
+        primaryStage.setScene(scene);
+        primaryStage.resizableProperty().setValue(false);
+        primaryStage.show();
     }
 
     @FXML

@@ -17,7 +17,7 @@ public class AnsPBOTugasBesar extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent fxml = FXMLLoader.load(getClass().getResource("/view/playerView.fxml"));
+        Parent fxml = FXMLLoader.load(getClass().getResource("/view/registerView.fxml"));
         
         Scene scene = new Scene(fxml);
         primaryStage.setTitle("Ans");

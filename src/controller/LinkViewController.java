@@ -119,6 +119,7 @@ public class LinkViewController implements Initializable {
 
         int episodeSelected = a;
         button.setOnAction((ActionEvent event) -> {
+            
             conn.cariLinkAnime(id, episodeSelected);
             PlayerViewController player = new PlayerViewController();
             player.setPlayer(urlId, id);

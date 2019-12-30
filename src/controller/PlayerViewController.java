@@ -7,7 +7,10 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +23,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import koneksi.koneksiClass;
 
 
 /**
@@ -35,6 +39,15 @@ public class PlayerViewController implements Initializable {
     private Label lblJudul;
     private static int idStreaming, idAnime;
     private static String strUrl;
+
+    public String getStrUrl() {
+        return strUrl;
+    }
+
+    public void setStrUrl(String strUrl) {
+        PlayerViewController.strUrl = strUrl;
+    }
+    
     
     @FXML
     private HBox mainPlayer;
@@ -51,13 +64,21 @@ public class PlayerViewController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        strUrl = "http://localhost/player/player.php?id="+Integer.toString(idStreaming);
+        koneksi.koneksiClass conn = new koneksiClass();
+        try {
+            conn.cariUrlStreaming(idStreaming);
+        } catch (SQLException ex) {
+            Logger.getLogger(PlayerViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         WebEngine engine = webViewPlayer.getEngine();
         engine.load(strUrl);
     }
 
     @FXML
     private void kembaliKeLinkView(ActionEvent event) throws IOException {
+        WebEngine engine = webViewPlayer.getEngine();
+        engine.load("");
         LinkViewController linkViewController = new LinkViewController();
         linkViewController.setContent(idAnime);
         Parent fxml = FXMLLoader.load(getClass().getResource("/view/linkView.fxml"));

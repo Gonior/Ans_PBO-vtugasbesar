@@ -18,23 +18,23 @@
         <URL value="@/asset/linkview.css" />
     </stylesheets>
     <children>
-        <VBox prefHeight="677.0" prefWidth="134.0" style="-fx-background-color: #7AC5CD;">
+        <VBox prefHeight="677.0" prefWidth="135.0" style="-fx-background-color: white;">
             <children>
                 <Button mnemonicParsing="false" onAction="#kembaliKeHomeView" style="-fx-background-color: transparent;">
                     <VBox.margin>
                         <Insets left="35.0" top="20.0" />
                     </VBox.margin>
                <graphic>
-                  <FontAwesomeIcon fill="WHITE" glyphName="ARROW_LEFT" size="4em" />
+                  <FontAwesomeIcon fill="#37c5cd" glyphName="ARROW_LEFT" size="4em" />
                </graphic>
                 </Button>
             </children>
         </VBox>
-        <ScrollPane layoutX="134.0" prefHeight="678.0" prefWidth="940.0">
+        <ScrollPane layoutX="134.0" prefHeight="678.0" prefWidth="940.0" style="-fx-background-color: #ffffff;">
             <content>
                 <VBox prefHeight="1000.0" prefWidth="919.0">
                     <children>
-                        <HBox prefHeight="388.0" prefWidth="915.0">
+                        <HBox prefHeight="388.0" prefWidth="835.0">
                             <children>
                                 <ImageView fx:id="lblImageView" fitHeight="317.0" fitWidth="225.0" pickOnBounds="true" preserveRatio="true">
                                     <viewport>

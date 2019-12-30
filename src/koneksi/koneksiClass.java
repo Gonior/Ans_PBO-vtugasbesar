@@ -1,6 +1,7 @@
 package koneksi;
 
 import controller.LinkViewController;
+import controller.PlayerViewController;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -23,6 +24,7 @@ public class koneksiClass {
     private static final String LOGIN_QUERY = "SELECT * FROM user WHERE username_user= ? AND password_user = ?";
     private static final String CARI_ANIME_QUERY = "SELECT * FROM anime WHERE id_anime= ?";
     private static final String CARI_ANIMELINK_QUERY = "SELECT * FROM streaming WHERE id_anime= ? AND episode_streaming= ?";
+    private static final String CARI_URL_QUERY = "SELECT * FROM streaming WHERE id_streaming = ?";
 
     public void insertRecord(int id, String nama, String username, String password) throws SQLException {
 
@@ -43,7 +45,6 @@ public class koneksiClass {
     public boolean cariRecord(String username) throws SQLException {
         boolean hasil = false;
         try (Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
-                
                 PreparedStatement preparedStatement = connection.prepareStatement(CARI_QUERY)) {
             preparedStatement.setString(1, username);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -56,8 +57,21 @@ public class koneksiClass {
 
     }
 
-    public void cariAnime(int id){
-        String judul = null, gambar = null, sinopsis = null, durasi = null, status = null,genre = null;
+    public void cariUrlStreaming(int id) throws SQLException {
+        String url = null;
+        Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+        PreparedStatement preparedStatement = connection.prepareStatement(CARI_URL_QUERY);
+        preparedStatement.setInt(1, id);
+        ResultSet rs = preparedStatement.executeQuery();
+        while (rs.next()) {
+            url = rs.getString("url_streaming");
+        }
+        PlayerViewController p = new PlayerViewController();
+        p.setStrUrl(url);
+    }
+
+    public void cariAnime(int id) {
+        String judul = null, gambar = null, sinopsis = null, durasi = null, status = null, genre = null;
         int jumlah = 0, id_anime_tampung = 0;
         double rating = 0;
         try (Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
@@ -81,16 +95,17 @@ public class koneksiClass {
             printSQLException(e);
         }
         LinkViewController l = new LinkViewController();
-        l.masukanData(judul, gambar, sinopsis, durasi, status,genre, jumlah, id_anime_tampung, rating);
+        l.masukanData(judul, gambar, sinopsis, durasi, status, genre, jumlah, id_anime_tampung, rating);
 
     }
-    public void cariLinkAnime(int id, int eps){
+
+    public void cariLinkAnime(int id, int eps) {
         int linkId = 0;
         try (Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
                 PreparedStatement preparedStatement = connection.prepareStatement(CARI_ANIMELINK_QUERY)) {
             preparedStatement.setInt(1, id);
             preparedStatement.setInt(2, eps);
-            
+
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 linkId = resultSet.getInt("id_streaming");
@@ -108,7 +123,6 @@ public class koneksiClass {
     public boolean login(String username, String password) throws SQLException {
         boolean hasil = false;
         try (Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
-
                 PreparedStatement preparedStatement = connection.prepareStatement(LOGIN_QUERY)) {
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);

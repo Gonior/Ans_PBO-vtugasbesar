@@ -1,3 +1,4 @@
+//
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,9 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import koneksi.ParsingDataContent;
 
 /**
  * FXML Controller class
@@ -25,7 +24,6 @@ import koneksi.ParsingDataContent;
  * @author Naniya
  */
 public class HomeViewController implements Initializable {
-
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -48,7 +46,7 @@ public class HomeViewController implements Initializable {
 
     @FXML
     private void masukKeLinkView2(ActionEvent event) throws IOException {
-    
+        
         LinkViewController linkViewController = new LinkViewController();
         linkViewController.setContent(2);
         Parent fxml = FXMLLoader.load(getClass().getResource("/view/linkView.fxml"));
@@ -63,7 +61,7 @@ public class HomeViewController implements Initializable {
    
     @FXML
     private void masukKeLinkView1(ActionEvent event) throws IOException {
-        
+
         LinkViewController linkViewController = new LinkViewController();
         linkViewController.setContent(1);
         Parent fxml = FXMLLoader.load(getClass().getResource("/view/linkView.fxml"));
@@ -75,5 +73,6 @@ public class HomeViewController implements Initializable {
         primaryStage.resizableProperty().setValue(false);
         primaryStage.show();
     }
+
 
 }

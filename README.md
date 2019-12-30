@@ -5,6 +5,5 @@ Mencegah ERROR
 2. Extrak semua file 
 3. Hidupkan Apache server dan mysql
 4. Import dbtugasbesar.sql ke phpmyadmin
-5. Simpan folder player di xampp/htdoc
-6. Run program
+5. Run program
 

@@ -27,7 +27,7 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="67.0" prefWidth="970.0">
                      <children>
-                        <Button fx:id="btnPrev" mnemonicParsing="false" onAction="#epsPrev" style="-fx-background-color: transparent;" text="Prev" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#epsPrev" style="-fx-background-color: transparent;" text="Prev" textFill="WHITE">
                            <HBox.margin>
                               <Insets right="30.0" />
                            </HBox.margin>
@@ -35,7 +35,7 @@
                               <Font name="Segoe UI" size="21.0" />
                            </font>
                         </Button>
-                        <Button fx:id="btnNext" mnemonicParsing="false" onAction="#epsNext" style="-fx-background-color: transparent;" text="Next" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#epsNext" style="-fx-background-color: transparent;" text="Next" textFill="WHITE">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>

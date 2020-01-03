@@ -9,6 +9,7 @@ import anspbotugasbesar.AlertHelper;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,6 +29,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.scene.Node;
+import javafx.scene.control.ButtonType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import koneksi.koneksiClass;
@@ -78,13 +80,13 @@ public class RegisterViewController implements Initializable {
                             "Masukan nama anda!");
                     return;
                 }
-                
+
                 if (cekAngka(namaFieldReg.getText())) {
                     AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
                             "Nama anda tidak sesuai, silakan masukan huruf saja!");
                     return;
                 }
-                
+
                 if (usernameFieldReg.getText().isEmpty()) {
                     AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
                             "Masukan nama pengguna anda!");
@@ -96,7 +98,7 @@ public class RegisterViewController implements Initializable {
                             flag++;
                         }
                     }
-                    
+
                     if (flag != 0) {
                         AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
                                 "Nama pengguna tidak sesuai, masukan tanpa spasi!");
@@ -113,31 +115,50 @@ public class RegisterViewController implements Initializable {
                     }
 
                 }
-                
+
                 if (ps1FieldReg.getText()
                         .isEmpty()) {
-                    
+
                     AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
                             "Masukan kata sandi anda!");
                     return;
                 }
-                
+
                 if (!ps1FieldReg.getText()
                         .equals(ps2FieldReg.getText())) {
                     AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
                             "Kata sandi tidak cocok!");
                     return;
                 }
-                
-                AlertHelper.showAlert(Alert.AlertType.CONFIRMATION, owner,
-                        "Registration Successful!",
-                        "Silahkan Lakukan Login");
-                
+
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Pendaftaran Berhasil");
+                alert.setHeaderText(null);
+                alert.setContentText("Tekan OK masuk ke formulir masuk");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK) {
+                    boxMasuk.setVisible(true);
+                    boxDaftar.setVisible(false);
+                    btnMasuk.setStyle("-fx-background-color: transparent; -fx-text-fill:  #37c5cd; -fx-border-width: 0px 0px 2px 0px; -fx-border-color:  #37c5cd;");
+                    btnDaftar.setStyle("-fx-background-color: transparent; -fx-text-fill:  #37c5cda2; -fx-border-width: 0px 0px 2px 0px; -fx-border-color:  #37c5cda2;");
+                    loginPassword.setText("");
+                    loginUsername.setText("");
+                } else {
+                    boxMasuk.setVisible(false);
+                    boxDaftar.setVisible(true);
+                    btnDaftar.setStyle("-fx-background-color: transparent; -fx-text-fill:  #37c5cd; -fx-border-width: 0px 0px 2px 0px; -fx-border-color: #37c5cd;");
+                    btnMasuk.setStyle("-fx-background-color: transparent; -fx-text-fill:  #37c5cda2; -fx-border-width: 0px 0px 2px 0px; -fx-border-color:  #37c5cda2;");
+                    namaFieldReg.setText("");
+                    usernameFieldReg.setText("");
+                    ps1FieldReg.setText("");
+                    ps2FieldReg.setText("");
+                };
+
                 int id = 0;
                 String nama = namaFieldReg.getText();
                 String uName = usernameFieldReg.getText();
                 String pass = ps1FieldReg.getText();
-                
+
                 try {
                     conn.insertRecord(id, nama, uName, pass);
                 } catch (SQLException ex) {
@@ -180,36 +201,37 @@ public class RegisterViewController implements Initializable {
             }
 
         });
-        loginUsername.setOnKeyReleased(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                koneksiClass conn = new koneksiClass();
-                Window owner = btnDaftarReg.getScene().getWindow();
-                String user, pass;
-                user = loginUsername.getText();
-                pass = loginPassword.getText();
-
-                try {
-                    if (conn.login(user, pass)) {
-                        loginPassword.setText("");
-                        loginUsername.setText("");
-                        Parent fxml = FXMLLoader.load(getClass().getResource("/view/homeView.fxml"));
-                        Stage primaryStage;
-                        primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                        Scene scene = new Scene(fxml);
-                        primaryStage.setTitle("Ans");
-                        primaryStage.setScene(scene);
-                        primaryStage.resizableProperty().setValue(false);
-                        primaryStage.show();
-                    } else {
-                        AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
-                                "Nama pengguna atau kata sandi anda salah!");
-
+        loginUsername.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode() == KeyCode.ENTER) {
+                    koneksiClass conn = new koneksiClass();
+                    Window owner = btnDaftarReg.getScene().getWindow();
+                    String user, pass;
+                    user = loginUsername.getText();
+                    pass = loginPassword.getText();
+                    try {
+                        if (conn.login(user, pass)) {
+                            loginPassword.setText("");
+                            loginUsername.setText("");
+                            conn.tampilAnime();
+                            Parent fxml = FXMLLoader.load(RegisterViewController.this.getClass().getResource("/view/homeView.fxml"));
+                            Stage primaryStage;
+                            primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                            Scene scene = new Scene(fxml);
+                            primaryStage.setTitle("Ans");
+                            primaryStage.setScene(scene);
+                            primaryStage.resizableProperty().setValue(false);
+                            primaryStage.show();
+                        } else {
+                            AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
+                                    "Nama pengguna atau kata sandi anda salah!");
+                        }
+                    } catch (SQLException | IOException ex) {
+                        Logger.getLogger(RegisterViewController.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                } catch (SQLException | IOException ex) {
-                    Logger.getLogger(RegisterViewController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-
         });
     }
 
@@ -257,7 +279,6 @@ public class RegisterViewController implements Initializable {
         } else {
             AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
                     "Nama pengguna atau kata sandi anda salah!");
-            return;
         }
     }
 
@@ -317,9 +338,28 @@ public class RegisterViewController implements Initializable {
             return;
         }
 
-        AlertHelper.showAlert(Alert.AlertType.CONFIRMATION, owner,
-                "Registration Successful!",
-                "Silahkan Lakukan Login");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Pendaftaran Berhasil");
+        alert.setHeaderText(null);
+        alert.setContentText("Tekan OK masuk ke formulir masuk");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            boxMasuk.setVisible(true);
+            boxDaftar.setVisible(false);
+            btnMasuk.setStyle("-fx-background-color: transparent; -fx-text-fill:  #37c5cd; -fx-border-width: 0px 0px 2px 0px; -fx-border-color:  #37c5cd;");
+            btnDaftar.setStyle("-fx-background-color: transparent; -fx-text-fill:  #37c5cda2; -fx-border-width: 0px 0px 2px 0px; -fx-border-color:  #37c5cda2;");
+            loginPassword.setText("");
+            loginUsername.setText("");
+        } else {
+            boxMasuk.setVisible(false);
+            boxDaftar.setVisible(true);
+            btnDaftar.setStyle("-fx-background-color: transparent; -fx-text-fill:  #37c5cd; -fx-border-width: 0px 0px 2px 0px; -fx-border-color: #37c5cd;");
+            btnMasuk.setStyle("-fx-background-color: transparent; -fx-text-fill:  #37c5cda2; -fx-border-width: 0px 0px 2px 0px; -fx-border-color:  #37c5cda2;");
+            namaFieldReg.setText("");
+            usernameFieldReg.setText("");
+            ps1FieldReg.setText("");
+            ps2FieldReg.setText("");
+        }
 
         int id = 0;
         String nama = namaFieldReg.getText();

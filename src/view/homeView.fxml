@@ -21,7 +21,7 @@
         <URL value="@/asset/homeview.css" />
     </stylesheets>
    <children>
-      <ScrollPane layoutX="134.0" layoutY="67.0" prefHeight="577.0" prefWidth="932.0">
+      <ScrollPane fx:id="homePanel" layoutX="134.0" layoutY="67.0" prefHeight="577.0" prefWidth="932.0">
          <content>
             <VBox prefHeight="1120.0" prefWidth="919.0">
                <children>
@@ -36,11 +36,17 @@
                                  <image>
                                     <Image url="@../asset/tumbnail/Kaguya-sama%20wa%20Kokurasetai%20Tensai-tachi%20no%20Renai%20Zunousen.jpg" />
                                  </image>
-                              </ImageView>
-                              <Label prefHeight="36.0" prefWidth="202.0" text="Kaguya-sama wa Kokurasetai: Tensai-tachi no Renai Zunousen" textAlignment="CENTER" wrapText="true">
                                  <VBox.margin>
-                                    <Insets top="10.0" />
+                                    <Insets bottom="20.0" top="10.0" />
                                  </VBox.margin>
+                              </ImageView>
+                              <Label alignment="CENTER" prefHeight="29.0" prefWidth="240.0" text="Kaguya-sama : Love Is War" textAlignment="CENTER" wrapText="true">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font name="Segoe UI" size="16.0" />
+                                 </font>
                               </Label>
                               <Button mnemonicParsing="false" onAction="#masukKeLinkView2" prefHeight="38.0" prefWidth="97.0" style="-fx-text-fill: #000000; -fx-text-fill: white; -fx-background-color: #37c5cd;" text="Tonton">
                                  <VBox.margin>
@@ -54,15 +60,22 @@
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="293.0" prefWidth="216.0">
                            <children>
-                              <ImageView fitHeight="258.0" fitWidth="164.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="369.0" fitWidth="164.0" pickOnBounds="true" preserveRatio="true">
                                  <viewport>
                                     <Rectangle2D />
                                  </viewport>
                                  <image>
                                     <Image url="@../asset/tumbnail/Kimi%20No%20Na%20Wa.jpg" />
                                  </image>
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" top="10.0" />
+                                 </VBox.margin>
                               </ImageView>
-                              <Label prefHeight="36.0" prefWidth="96.0" text="Kimi No Na Wa" wrapText="true" />
+                              <Label alignment="CENTER" prefHeight="29.0" prefWidth="240.0" text="Kimi No Na Wa" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font name="Segoe UI" size="16.0" />
+                                 </font>
+                              </Label>
                               <Button mnemonicParsing="false" onAction="#masukKeLinkView1" prefHeight="38.0" prefWidth="109.0" style="-fx-text-fill: #000000; -fx-text-fill: white; -fx-background-color: #37c5cd;" text="Tonton" wrapText="true">
                                  <VBox.margin>
                                     <Insets top="12.0" />
@@ -75,38 +88,26 @@
                         </VBox>
                         <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="245.0" prefWidth="242.0">
                            <children>
-                              <ImageView fitHeight="258.0" fitWidth="164.0"  pickOnBounds="true" preserveRatio="true">
-                                 <viewport>
-                                    <Rectangle2D />
-                                 </viewport>
-                                 <image>
-                                    <Image url="@../asset/tumbnail/Kaguya-sama%20wa%20Kokurasetai%20Tensai-tachi%20no%20Renai%20Zunousen.jpg" />
-                                 </image>
-                              </ImageView>
-                              <Label prefHeight="36.0" prefWidth="202.0" text="Kaguya-sama wa Kokurasetai: Tensai-tachi no Renai Zunousen" textAlignment="CENTER" wrapText="true">
-                                 <VBox.margin>
-                                    <Insets top="10.0" />
-                                 </VBox.margin>
-                              </Label>
-                              <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="97.0" style="-fx-text-fill: #000000; -fx-text-fill: white; -fx-background-color: #37c5cd;" text="Tonton">
-                                 <font>
-                                    <Font name="Segoe UI" size="20.0" />
-                                 </font>
-                              </Button>
-                           </children>
-                        </VBox>
-                        <VBox alignment="CENTER" layoutX="252.0" layoutY="10.0" prefHeight="293.0" prefWidth="216.0">
-                           <children>
                               <ImageView fitHeight="258.0" fitWidth="164.0" pickOnBounds="true" preserveRatio="true">
                                  <viewport>
                                     <Rectangle2D />
                                  </viewport>
                                  <image>
-                                    <Image url="@../asset/tumbnail/Kimi%20No%20Na%20Wa.jpg" />
+                                    <Image url="@../asset/tumbnail/Charlotte.jpg" />
                                  </image>
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" top="10.0" />
+                                 </VBox.margin>
                               </ImageView>
-                              <Label prefHeight="36.0" prefWidth="96.0" text="Kimi No Na Wa" wrapText="true" />
-                              <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="109.0" style="-fx-text-fill: #000000; -fx-text-fill: white; -fx-background-color: #37c5cd;" text="Tonton" wrapText="true">
+                              <Label alignment="CENTER" prefHeight="29.0" prefWidth="235.0" text="Charlotte" wrapText="true">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font name="Segoe UI" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Button mnemonicParsing="false" onAction="#masukKeLinkView3" prefHeight="38.0" prefWidth="97.0" style="-fx-text-fill: #000000; -fx-text-fill: white; -fx-background-color: #37c5cd;" text="Tonton">
                                  <font>
                                     <Font name="Segoe UI" size="20.0" />
                                  </font>
@@ -141,7 +142,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="71.0" prefWidth="150.0" style="-fx-background-color: #3ba1b8;">
                <children>
-                  <Button mnemonicParsing="false" style="-fx-background-color: transparent;">
+                  <Button mnemonicParsing="false" onAction="#kembaliKeHomePanel" style="-fx-background-color: transparent;">
                      <font>
                         <Font name="Segoe UI" size="20.0" />
                      </font>
@@ -163,9 +164,9 @@
             </HBox>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="110.0" prefHeight="71.0" prefWidth="150.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#kembaliKeRegister" style="-fx-background-color: transparent;">
+                  <Button fx:id="btnKeluar" mnemonicParsing="false" onAction="#btnKeluar" style="-fx-background-color: transparent;">
                      <graphic>
-                        <FontAwesomeIcon fill="WHITE" focusTraversable="true" glyphName="REMOVE" size="3em" />
+                        <FontAwesomeIcon fill="#970808" focusTraversable="true" glyphName="REMOVE" size="3em" />
                      </graphic>
                   </Button>
                </children>
@@ -173,16 +174,16 @@
             <HBox alignment="CENTER" layoutX="10.0" layoutY="181.0" prefHeight="71.0" prefWidth="150.0" />
          </children>
       </VBox>
-      <HBox alignment="CENTER_RIGHT" layoutX="141.0" layoutY="4.0" prefHeight="56.0" prefWidth="917.0">
+      <HBox alignment="CENTER_LEFT" layoutX="141.0" layoutY="4.0" prefHeight="56.0" prefWidth="925.0">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="56.0" prefWidth="714.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="56.0" prefWidth="650.0">
                <children>
-                  <FontAwesomeIcon fill="#37c5cd" glyphName="EDIT" size="2em">
+                  <Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#btnGantiAkun" prefHeight="25.0" prefWidth="79.0" style="-fx-background-color: transparent;" text="Ganti akun?" textFill="#b90505">
                      <HBox.margin>
-                        <Insets />
+                        <Insets top="10.0" />
                      </HBox.margin>
-                  </FontAwesomeIcon>
-                  <Label prefHeight="24.0" prefWidth="415.0" text="Firman Alfinas">
+                  </Button>
+                  <Label fx:id="lblNamaUser" prefHeight="24.0" prefWidth="518.0" text="Nama User">
                      <HBox.margin>
                         <Insets bottom="-1.0" />
                      </HBox.margin>
@@ -192,19 +193,84 @@
                   </Label>
                </children>
             </HBox>
-            <FontAwesomeIcon fill="#37c5cd" glyphName="SEARCH" size="2em">
-               <HBox.margin>
-                  <Insets right="15.0" />
-               </HBox.margin>
-            </FontAwesomeIcon>
-            <TextField alignment="TOP_LEFT" prefHeight="39.0" prefWidth="406.0" style="-fx-background-color: transparent; -fx-border-color: #37c5cd; -fx-border-width: 0px 0px 1px 0px;">
-               <font>
-                  <Font name="Segoe UI" size="20.0" />
-               </font></TextField>
+            <HBox alignment="CENTER_RIGHT" prefHeight="56.0" prefWidth="346.0">
+               <children>
+                  <Button fx:id="btnCari" mnemonicParsing="false" onAction="#showTxtCari" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <FontAwesomeIcon fill="#37c5cd" glyphName="SEARCH" size="2em" text="" />
+                     </graphic>
+                  </Button>
+                  <TextField fx:id="txtCari" alignment="TOP_LEFT" prefHeight="38.0" prefWidth="0.0" promptText="Judul anime" style="-fx-background-color: transparent; -fx-border-color: #37c5cd; -fx-border-width: 0;">
+                     <font>
+                        <Font name="Segoe UI" size="20.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
          </children>
          <padding>
             <Insets right="15.0" />
          </padding>
+      </HBox>
+      <HBox fx:id="panelNotFound" alignment="CENTER" layoutX="174.0" layoutY="125.0" prefHeight="285.0" prefWidth="866.0" visible="false">
+         <children>
+            <VBox prefHeight="443.0" prefWidth="865.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="285.0" prefWidth="868.0">
+                     <children>
+                        <Label style="-fx-text-fill: #37c5cd;" text="Anime">
+                           <font>
+                              <Font name="Segoe UI" size="40.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblAnimeNotFound" style="-fx-text-fill: #37c5cd;" text="&quot;X&quot;">
+                           <font>
+                              <Font name="Segoe UI" size="40.0" />
+                           </font>
+                        </Label>
+                        <Label style="-fx-text-fill: #37c5cd;" text="Tidak Ditemukan.">
+                           <font>
+                              <Font name="Segoe UI" size="40.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox fx:id="panelFound" alignment="CENTER" layoutX="184.0" layoutY="135.0" prefHeight="285.0" prefWidth="866.0" visible="false">
+         <children>
+            <VBox prefHeight="299.0" prefWidth="850.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="299.0" prefWidth="537.0">
+                     <children>
+                        <ImageView fx:id="imageAnimeFound" fitHeight="258.0" fitWidth="164.0" pickOnBounds="true" preserveRatio="true">
+                           <viewport>
+                              <Rectangle2D />
+                           </viewport>
+                        </ImageView>
+                        <Label fx:id="lblAnimeFoundJudul" alignment="CENTER" prefHeight="32.0" prefWidth="276.0" text="Kaguya-sama love is war" textAlignment="JUSTIFY" wrapText="true">
+                           <VBox.margin>
+                              <Insets bottom="20.0" top="10.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Segoe UI" size="25.0" />
+                           </font>
+                        </Label>
+                        <Button mnemonicParsing="false" onAction="#masukKeLinkViewCari" prefHeight="38.0" prefWidth="97.0" style="-fx-text-fill: #000000; -fx-text-fill: white; -fx-background-color: #37c5cd;" text="Tonton">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Segoe UI" size="20.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
       </HBox>
    </children>
 </AnchorPane>

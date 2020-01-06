@@ -117,7 +117,6 @@ public void validasiEpisode(String u) throws SQLException {
         validasiEpisode(strUrl);
         lblJudul.setText(conn.getJudulAnime() + " Episode " + conn.getEpisodeStreaming());
         WebEngine engine = webViewPlayer.getEngine();
-        engine.reload();
         engine.load(strUrl);
     }
 

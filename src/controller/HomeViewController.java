@@ -38,7 +38,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import javafx.util.Duration;
 import koneksi.koneksiClass;
 import org.controlsfx.control.textfield.TextFields;
@@ -76,9 +75,8 @@ public class HomeViewController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(HomeViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        ArrayList dataList = conn.getAnimeData();
+        ArrayList<String> dataList = conn.getAnimeData();
         Object[] data = dataList.toArray();
-//        String[] data = {"kimi no na wa", "Chralotte", "kaguya-sama love is war"};
         TextFields.bindAutoCompletion(txtCari, data);
         txtCari.setOnKeyReleased((KeyEvent event) -> {
             if (event.getCode() == KeyCode.ENTER) {
@@ -121,7 +119,6 @@ public class HomeViewController implements Initializable {
 
     @FXML
     private void masukKeLinkView1(ActionEvent event) throws IOException {
-
         LinkViewController linkViewController = new LinkViewController();
         linkViewController.setContent(1);
         Parent fxml = FXMLLoader.load(getClass().getResource("/view/linkView.fxml"));
@@ -188,7 +185,6 @@ public class HomeViewController implements Initializable {
             timeline.getKeyFrames().addAll(kf1, kf2);
             timeline.play();
         } else {
-
             txtCari.setStyle("-fx-border-width : 0px 0px 0px 0px;-fx-background-color : transparent;-fx-border-color: #37c5cd;");
             txtCari.setPrefWidth(0);
             txtCari.translateXProperty().set(266);
@@ -201,7 +197,6 @@ public class HomeViewController implements Initializable {
             timeline.getKeyFrames().addAll(kf1, kf2);
             timeline.play();
         }
-
     }
 
     @FXML
@@ -227,8 +222,6 @@ public class HomeViewController implements Initializable {
 
     @FXML
     private void btnKeluar(ActionEvent event) {
-        Window owner = btnKeluar.getScene().getWindow();
-
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Konfirmasi");
         alert.setHeaderText("Anda yakin akan keluar?");

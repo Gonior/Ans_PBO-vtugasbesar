@@ -17,8 +17,9 @@ Cara push ke github
 
 Mencegah ERROR 
 1. Donwload semua file
-2. Extrak semua file 
-3. Hidupkan Apache server dan mysql
-4. Import dbtugasbesar.sql ke phpmyadmin
-5. Run program
+2. Extrak semua file
+3. Install Plugin di Netbeans(jika tidak terinstall)
+4. Hidupkan Apache server dan mysql
+5. Import dbtugasbesar.sql ke phpmyadmin
+6. Run program
 

@@ -23,3 +23,6 @@ Mencegah ERROR
 5. Import dbtugasbesar.sql ke phpmyadmin
 6. Run program
 
+
+NB: untuk VIA BROWSER,merupakan Plugin yang ti harus ada dan di tambahkan ketika tidak terinstall di IDE Netbeans
+

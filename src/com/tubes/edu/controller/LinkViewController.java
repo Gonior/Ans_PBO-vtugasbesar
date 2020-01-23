@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package com.tubes.edu.controller;
 
 import java.io.IOException;
 import java.net.URL;
@@ -26,7 +26,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import koneksi.koneksiClass;
+import com.tubes.edu.connection.TubesDB;
 
 /**
  * FXML Controller class
@@ -54,7 +54,7 @@ public class LinkViewController implements Initializable {
     private Label lblSinopsis;
     @FXML
     private ImageView lblImageView;
-    koneksiClass conn = new koneksiClass();
+    TubesDB conn = new TubesDB();
     private static String judul, gambar, genre, sinopsis, durasi, status;
     private static int id, jumlah, konten, urlId;
     private static double rating;
@@ -120,7 +120,7 @@ public class LinkViewController implements Initializable {
             player.setPlayer(urlId, id);
             Parent fxml = null;
             try {
-                fxml = FXMLLoader.load(getClass().getResource("/view/playerView.fxml"));
+                fxml = FXMLLoader.load(getClass().getResource("/com/tubes/edu/view/playerView.fxml"));
             } catch (IOException ex) {
                 Logger.getLogger(LinkViewController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -159,7 +159,7 @@ public class LinkViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         TampilkanKonten(konten);
-        final Image tumbnail = new Image(getClass().getResourceAsStream("/asset/tumbnail/" + gambar));
+        final Image tumbnail = new Image(getClass().getResourceAsStream("/com/tubes/edu/asset/tumbnail/" + gambar));
         lblJudul.setText(judul);
         lblSinopsis.setText(sinopsis);
         lblStatus.setText(status);
@@ -176,7 +176,7 @@ public class LinkViewController implements Initializable {
 
     @FXML
     private void kembaliKeHomeView(ActionEvent event) throws IOException {
-        Parent fxml = FXMLLoader.load(getClass().getResource("/view/homeView.fxml"));
+        Parent fxml = FXMLLoader.load(getClass().getResource("/com/tubes/edu/view/homeView.fxml"));
         Stage primaryStage;
         primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(fxml);

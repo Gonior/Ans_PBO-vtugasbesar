@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="644.0" prefWidth="1066.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RegisterViewController">
+<AnchorPane id="AnchorPane" prefHeight="644.0" prefWidth="1066.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.edu.controller.RegisterViewController">
    <children>
       <ImageView fitHeight="534.0" fitWidth="856.0" layoutX="280.0" layoutY="113.0" pickOnBounds="true">
          <image>
@@ -31,15 +31,12 @@
                </font></Text>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Button fx:id="btnMasuk" mnemonicParsing="false" onAction="#masuk" style="-fx-background-color: transparent; -fx-text-fill: #37c5cd; -fx-border-width: 0px 0px 2px 0px; -fx-border-color: #37c5cd;" text="Masuk" textFill="#37c5cd">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
+                  <Button fx:id="btnMasuk" mnemonicParsing="false" onAction="#masuk" style="-fx-background-color: transparent; -fx-text-fill:  #37c5cd; -fx-border-width: 0px 0px 2px 0px; -fx-border-color: #37c5cd;" text="Masuk" textFill="#37c5cd" HBox.hgrow="ALWAYS">
                      <font>
                         <Font name="Segoe UI" size="19.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnDaftar" mnemonicParsing="false" onAction="#daftar" style="-fx-background-color: transparent; -fx-text-fill: #37c5cda2; -fx-border-width: 0px 0px 2px 0px; -fx-border-color: #37c5cda2;" text="Daftar" textFill="#006268">
+                  <Button fx:id="btnDaftar" mnemonicParsing="false" onAction="#daftar" style="-fx-background-color: transparent; -fx-text-fill:  #37c5cda2; -fx-border-width: 0px 0px 2px 0px; -fx-border-color: #37c5cda2;" text="Daftar" textFill="#006268" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
-<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Point3D?>
 <?import javafx.geometry.Rectangle2D?>
@@ -16,20 +15,17 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="644.0" prefWidth="1066.0" style="-fx-background-color: transparent;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomeViewController">
-    <stylesheets>
-        <URL value="@/asset/homeview.css" />
-    </stylesheets>
+<AnchorPane id="AnchorPane" prefHeight="644.0" prefWidth="1066.0" style="-fx-background-color: transparent;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.edu.controller.HomeViewController">
    <children>
-      <ScrollPane fx:id="homePanel" layoutX="134.0" layoutY="67.0" prefHeight="577.0" prefWidth="932.0">
+      <ScrollPane fx:id="homePanel" hbarPolicy="ALWAYS" layoutX="134.0" layoutY="67.0" prefHeight="577.0" prefWidth="932.0" vbarPolicy="ALWAYS">
          <content>
-            <VBox prefHeight="1120.0" prefWidth="919.0">
+            <VBox fx:id="barisKontainer" prefHeight="1120.0" prefWidth="919.0">
                <children>
-                  <HBox prefHeight="340.0" prefWidth="861.0">
+                  <HBox fx:id="kolomContainer" prefHeight="340.0" prefWidth="861.0">
                      <children>
-                        <VBox alignment="CENTER" prefHeight="245.0" prefWidth="242.0">
+                        <VBox fx:id="cotainer" alignment="CENTER" prefHeight="245.0" prefWidth="242.0">
                            <children>
-                              <ImageView fitHeight="258.0" fitWidth="164.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="gambar" fitHeight="258.0" fitWidth="164.0" pickOnBounds="true" preserveRatio="true">
                                  <viewport>
                                     <Rectangle2D />
                                  </viewport>
@@ -40,7 +36,7 @@
                                     <Insets bottom="20.0" top="10.0" />
                                  </VBox.margin>
                               </ImageView>
-                              <Label alignment="CENTER" prefHeight="29.0" prefWidth="240.0" text="Kaguya-sama : Love Is War" textAlignment="CENTER" wrapText="true">
+                              <Label fx:id="judul" alignment="CENTER" prefHeight="29.0" prefWidth="240.0" text="Kaguya-sama : Love Is War" textAlignment="CENTER" wrapText="true">
                                  <VBox.margin>
                                     <Insets bottom="10.0" />
                                  </VBox.margin>
@@ -48,7 +44,7 @@
                                     <Font name="Segoe UI" size="16.0" />
                                  </font>
                               </Label>
-                              <Button mnemonicParsing="false" onAction="#masukKeLinkView2" prefHeight="38.0" prefWidth="97.0" style="-fx-text-fill: #000000; -fx-text-fill: white; -fx-background-color: #37c5cd;" text="Tonton">
+                              <Button fx:id="tombol" mnemonicParsing="false" onAction="#masukKeLinkView2" prefHeight="38.0" prefWidth="97.0" style="-fx-text-fill: #000000; -fx-text-fill: white; -fx-background-color: #37c5cd;" text="Tonton">
                                  <VBox.margin>
                                     <Insets />
                                  </VBox.margin>
@@ -132,7 +128,7 @@
                <children>
                   <Label rotate="10.0" text="Ans" textFill="WHITE">
                      <font>
-                        <Font name="Segoe Script" size="39.0" />
+                        <Font name="Segoe UI" size="39.0" />
                      </font>
                      <rotationAxis>
                         <Point3D z="-1.0" />
@@ -178,7 +174,7 @@
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="56.0" prefWidth="650.0">
                <children>
-                  <Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#btnGantiAkun" prefHeight="25.0" prefWidth="79.0" style="-fx-background-color: transparent;" text="Ganti akun?" textFill="#b90505">
+                  <Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#btnGantiAkun" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: transparent;" text="Ganti akun?" textFill="#b90505">
                      <HBox.margin>
                         <Insets top="10.0" />
                      </HBox.margin>

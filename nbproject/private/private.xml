@@ -3,14 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Semester%203/PBO/Contoh/AnsPBOTugasBesar/src/controller/RegisterViewController.java</file>
-            <file>file:/D:/Semester%203/PBO/Contoh/AnsPBOTugasBesar/src/anspbotugasbesar/AnsPBOTugasBesar.java</file>
-            <file>file:/D:/Semester%203/PBO/Contoh/AnsPBOTugasBesar/src/controller/LinkViewController.java</file>
-            <file>file:/D:/Semester%203/PBO/Contoh/AnsPBOTugasBesar/src/anspbotugasbesar/AlertHelper.java</file>
-            <file>file:/D:/Semester%203/PBO/Contoh/AnsPBOTugasBesar/src/controller/PlayerViewController.java</file>
-            <file>file:/D:/Semester%203/PBO/Contoh/AnsPBOTugasBesar/src/koneksi/koneksiClass.java</file>
-            <file>file:/D:/Semester%203/PBO/Contoh/AnsPBOTugasBesar/src/view/homeView.fxml</file>
-            <file>file:/D:/Semester%203/PBO/Contoh/AnsPBOTugasBesar/src/controller/HomeViewController.java</file>
+            <file>file:/media/naniya/Perkuliahan/Semester%203/PBO/Tugas%20Besar/Ans_PBO-vtugasbesar/src/com/tubes/edu/view/homeBase.java</file>
+            <file>file:/media/naniya/Perkuliahan/Semester%203/PBO/Tugas%20Besar/Ans_PBO-vtugasbesar/src/com/tubes/edu/controller/RegisterViewController.java</file>
+            <file>file:/media/naniya/Perkuliahan/Semester%203/PBO/Tugas%20Besar/Ans_PBO-vtugasbesar/src/com/tubes/edu/controller/HomeViewController.java</file>
+            <file>file:/media/naniya/Perkuliahan/Semester%203/PBO/Tugas%20Besar/Ans_PBO-vtugasbesar/src/com/tubes/edu/model/Link.java</file>
+            <file>file:/media/naniya/Perkuliahan/Semester%203/PBO/Tugas%20Besar/Ans_PBO-vtugasbesar/src/com/tubes/edu/event/TubesEvent.java</file>
+            <file>file:/media/naniya/Perkuliahan/Semester%203/PBO/Tugas%20Besar/Ans_PBO-vtugasbesar/src/com/tubes/edu/model/Anime.java</file>
+            <file>file:/media/naniya/Perkuliahan/Semester%203/PBO/Tugas%20Besar/Ans_PBO-vtugasbesar/src/com/tubes/edu/connection/TubesDB.java</file>
         </group>
     </open-files>
 </project-private>

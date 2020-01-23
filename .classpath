@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+        <classpathentry exported="true" kind="lib" path="lib/controlsfx-8.40.11.jar"/>
+        <classpathentry exported="true" kind="lib" path="lib/fontawesomefx-8.2.jar"/>
+        <classpathentry exported="true" kind="lib" path="lib/mysql-connector-java-5.1.23-bin.jar"/>
+</classpath>

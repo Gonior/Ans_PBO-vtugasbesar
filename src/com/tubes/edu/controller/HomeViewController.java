@@ -4,31 +4,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package com.tubes.edu.controller;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.controlsfx.control.textfield.TextFields;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -39,8 +34,13 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import koneksi.koneksiClass;
-import org.controlsfx.control.textfield.TextFields;
+import com.tubes.edu.connection.TubesDB;
+import com.tubes.edu.data.TubesSendingData;
+import com.tubes.edu.event.AlertHelper;
+import com.tubes.edu.event.TubesEvent;
+import com.tubes.edu.model.Anime;
+import java.util.List;
+import javafx.stage.Window;
 
 public class HomeViewController implements Initializable {
 
@@ -48,7 +48,9 @@ public class HomeViewController implements Initializable {
     private TextField txtCari;
     @FXML
     private Label lblNamaUser;
-    koneksiClass conn = new koneksiClass();
+    TubesDB conn = new TubesDB();
+    TubesSendingData sendData = new TubesSendingData();
+    private TubesEvent tubesEvent;
     @FXML
     private ScrollPane homePanel;
     @FXML
@@ -66,10 +68,22 @@ public class HomeViewController implements Initializable {
     @FXML
     private Button btnKeluar;
 
+    public HomeViewController() {
+        try {
+            tubesEvent = new TubesEvent(TubesDB.getConnection());
+        } catch (SQLException ex) {
+            Logger.getLogger(HomeViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
-        lblNamaUser.setText(conn.getNamaLengkap());
+        lblNamaUser.setText(TubesSendingData.getUser().getNama());
+        try {
+            barisDanKolom();
+        } catch (SQLException ex) {
+            Logger.getLogger(HomeViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try {
             conn.tampilAnime();
         } catch (SQLException ex) {
@@ -82,16 +96,12 @@ public class HomeViewController implements Initializable {
             if (event.getCode() == KeyCode.ENTER) {
                 try {
                     if (conn.cariAnime(HomeViewController.this.txtCari.getText())) {
-                        homePanel.setVisible(false);
-                        panelNotFound.setVisible(false);
-                        panelFound.setVisible(true);
+                        showFoundPanel(true);
                         lblAnimeFoundJudul.setText(conn.getJudulAnime());
-                        final Image gambar = new Image(HomeViewController.this.getClass().getResourceAsStream("/asset/tumbnail/" + conn.getGambarAnime()));
+                        final Image gambar = new Image(HomeViewController.this.getClass().getResourceAsStream("/com/tubes/edu/asset/tumbnail/" + conn.getGambarAnime()));
                         imageAnimeFound.setImage(gambar);
                     } else {
-                        homePanel.setVisible(false);
-                        panelNotFound.setVisible(true);
-                        panelFound.setVisible(false);
+                        showFoundPanel(false);
                         lblAnimeNotFound.setText(HomeViewController.this.txtCari.getText());
                     }
                 } catch (SQLException ex) {
@@ -101,74 +111,78 @@ public class HomeViewController implements Initializable {
         });
     }
 
-
     @FXML
     private void masukKeLinkView2(ActionEvent event) throws IOException {
-
-        LinkViewController linkViewController = new LinkViewController();
-        linkViewController.setContent(2);
-        Parent fxml = FXMLLoader.load(getClass().getResource("/view/linkView.fxml"));
-        Stage primaryStage;
-        primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(fxml);
-        primaryStage.setTitle("Ans");
-        primaryStage.setScene(scene);
-        primaryStage.resizableProperty().setValue(false);
-        primaryStage.show();
+        nonton(2, event);
     }
 
     @FXML
     private void masukKeLinkView1(ActionEvent event) throws IOException {
-        LinkViewController linkViewController = new LinkViewController();
-        linkViewController.setContent(1);
-        Parent fxml = FXMLLoader.load(getClass().getResource("/view/linkView.fxml"));
-        Stage primaryStage;
-        primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(fxml);
-        primaryStage.setTitle("Ans");
-        primaryStage.setScene(scene);
-        primaryStage.resizableProperty().setValue(false);
-        primaryStage.show();
+        nonton(1, event);
     }
 
     @FXML
     private void masukKeLinkView3(ActionEvent event) throws IOException {
-
-        LinkViewController linkViewController = new LinkViewController();
-        linkViewController.setContent(3);
-        Parent fxml = FXMLLoader.load(getClass().getResource("/view/linkView.fxml"));
-        Stage primaryStage;
-        primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(fxml);
-        primaryStage.setTitle("Ans");
-        primaryStage.setScene(scene);
-        primaryStage.resizableProperty().setValue(false);
-        primaryStage.show();
+        nonton(3, event);
     }
 
     @FXML
     private void masukKeLinkViewCari(ActionEvent event) throws IOException {
         LinkViewController linkViewController = new LinkViewController();
         linkViewController.setContent(conn.getIdAnime());
-        Parent fxml = FXMLLoader.load(getClass().getResource("/view/linkView.fxml"));
-        Stage primaryStage;
-        primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(fxml);
-        primaryStage.setTitle("Ans");
-        primaryStage.setScene(scene);
-        primaryStage.resizableProperty().setValue(false);
-        primaryStage.show();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        tubesEvent.changeStage(stage, "linkView");
     }
 
     @FXML
     private void kembaliKeHomePanel(ActionEvent event) {
+        showHome();
+    }
+
+    @FXML
+    private void showTxtCari(ActionEvent event) {
+        animasiTxtField();
+    }
+
+    @FXML
+    private void btnGantiAkun(ActionEvent event) throws IOException {
+        Window owner = btnKeluar.getScene().getWindow();
+        boolean hasil = AlertHelper.showAndWaitAlert(AlertType.CONFIRMATION, owner, "Konfirmasi", "Tekan Ok untuk ganti akun");
+        if (hasil) {
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            tubesEvent.changeStage(stage, "registerView");
+        }
+
+//      
+    }
+
+    @FXML
+    private void btnKeluar(ActionEvent event) {
+        Window owner = btnKeluar.getScene().getWindow();
+        boolean hasil = AlertHelper.showAndWaitAlert(AlertType.CONFIRMATION, owner, "Konfirmasi", "Tekan Ok untuk keluar dari aplikasi Ans");
+        if (hasil) {
+            System.exit(0);
+        }
+    }
+    
+    public void showHome() {
         homePanel.setVisible(true);
         panelNotFound.setVisible(false);
         panelFound.setVisible(false);
     }
 
-    @FXML
-    private void showTxtCari(ActionEvent event) {
+    public void showFoundPanel(boolean b) {
+        if (b) {
+            homePanel.setVisible(false);
+            panelNotFound.setVisible(false);
+            panelFound.setVisible(true);
+        } else {
+            homePanel.setVisible(false);
+            panelNotFound.setVisible(true);
+            panelFound.setVisible(false);
+        }
+    }
+    public void animasiTxtField() {
         Timeline timeline = new Timeline();
         KeyValue kv1, kv2;
         KeyFrame kf1, kf2;
@@ -198,38 +212,21 @@ public class HomeViewController implements Initializable {
             timeline.play();
         }
     }
-
-    @FXML
-    private void btnGantiAkun(ActionEvent event) throws IOException {
-        Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle("Konfirmasi");
-        alert.setHeaderText(null);
-        alert.setContentText("Tekan OK untuk ganti akun");
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK) {
-//            untuk ganti scene 
-            Parent fxml = FXMLLoader.load(getClass().getResource("/view/registerView.fxml"));
-            Stage primaryStage;
-            primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(fxml);
-            primaryStage.setTitle("Ans");
-            primaryStage.setScene(scene);
-            primaryStage.resizableProperty().setValue(false);
-            primaryStage.show();
-        }
-//      
+    
+    public void nonton(int konten, ActionEvent event) throws IOException {
+        LinkViewController linkViewController = new LinkViewController();
+        linkViewController.setContent(konten);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        tubesEvent.changeStage(stage, "linkView");
     }
-
-    @FXML
-    private void btnKeluar(ActionEvent event) {
-        Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle("Konfirmasi");
-        alert.setHeaderText("Anda yakin akan keluar?");
-        alert.setContentText("Tekan OK untuk keluar");
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK) {
-            System.exit(0);
-        }
+    
+    public void barisDanKolom() throws SQLException {
+        tubesEvent.getAllAnime();
+        List<Anime> list = tubesEvent.getAllAnime();
+        list.size();
+        list.forEach((anime) -> {
+            System.out.println(anime.getJudul());
+        });
+        
     }
-
 }

@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="644.0" prefWidth="1066.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.edu.controller.LinkViewController">
+    
+    <children>
+        <VBox prefHeight="677.0" prefWidth="135.0" style="-fx-background-color: white;">
+            <children>
+                <Button mnemonicParsing="false" onAction="#kembaliKeHomeView" style="-fx-background-color: transparent;">
+                    <VBox.margin>
+                        <Insets left="35.0" top="20.0" />
+                    </VBox.margin>
+               <graphic>
+                  <FontAwesomeIcon fill="#37c5cd" glyphName="ARROW_LEFT" size="4em" />
+               </graphic>
+                </Button>
+            </children>
+        </VBox>
+        <ScrollPane layoutX="134.0" prefHeight="678.0" prefWidth="940.0" style="-fx-background-color: #ffffff;">
+            <content>
+                <VBox prefHeight="1000.0" prefWidth="919.0">
+                    <children>
+                        <HBox prefHeight="388.0" prefWidth="835.0">
+                            <children>
+                                <ImageView fx:id="lblImageView" fitHeight="317.0" fitWidth="225.0" pickOnBounds="true" preserveRatio="true">
+                                    <viewport>
+                                        <Rectangle2D />
+                                    </viewport>
+                                    <HBox.margin>
+                                        <Insets left="30.0" top="50.0" />
+                                    </HBox.margin>
+                                </ImageView>
+                                <VBox prefHeight="388.0" prefWidth="147.0">
+                                    <children>
+                                        <Label text="Judul">
+                                            <VBox.margin>
+                                                <Insets top="10.0" />
+                                            </VBox.margin>
+                                            <font>
+                                                <Font name="Segoe UI" size="18.0" />
+                                            </font>
+                                        </Label>
+                                        <Label text="Rating">
+                                            <VBox.margin>
+                                                <Insets top="10.0" />
+                                            </VBox.margin>
+                                            <font>
+                                                <Font name="Segoe UI" size="18.0" />
+                                            </font>
+                                        </Label>
+                                        <Label text="Status">
+                                            <VBox.margin>
+                                                <Insets top="10.0" />
+                                            </VBox.margin>
+                                            <font>
+                                                <Font name="Segoe UI" size="18.0" />
+                                            </font>
+                                        </Label>
+                                        <Label text="Genre">
+                                            <VBox.margin>
+                                                <Insets top="10.0" />
+                                            </VBox.margin>
+                                            <font>
+                                                <Font name="Segoe UI" size="18.0" />
+                                            </font>
+                                        </Label>
+                              <Label layoutX="10.0" layoutY="103.0" text="Durasi" textAlignment="RIGHT">
+                                 <font>
+                                    <Font name="Segoe UI" size="18.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="202.0" text="Jumlah Episode" textAlignment="RIGHT">
+                                 <font>
+                                    <Font name="Segoe UI" size="18.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="225.0" text="Sinopsis" textAlignment="RIGHT">
+                                 <font>
+                                    <Font name="Segoe UI" size="18.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                                    </children>
+                                    <padding>
+                                        <Insets top="40.0" />
+                                    </padding>
+                                    <HBox.margin>
+                                        <Insets left="20.0" />
+                                    </HBox.margin>
+                                </VBox>
+                                <VBox layoutX="350.0" layoutY="10.0" prefHeight="388.0" prefWidth="16.0">
+                                    <children>
+                                        <Label text=": ">
+                                            <font>
+                                                <Font name="Segoe UI" size="18.0" />
+                                            </font>
+                                            <VBox.margin>
+                                                <Insets top="10.0" />
+                                            </VBox.margin>
+                                        </Label>
+                                        <Label text=": ">
+                                            <font>
+                                                <Font name="Segoe UI" size="18.0" />
+                                            </font>
+                                            <VBox.margin>
+                                                <Insets top="10.0" />
+                                            </VBox.margin>
+                                        </Label>
+                                        <Label text=": ">
+                                            <font>
+                                                <Font name="Segoe UI" size="18.0" />
+                                            </font>
+                                            <VBox.margin>
+                                                <Insets top="10.0" />
+                                            </VBox.margin>
+                                        </Label>
+                                        <Label text=": ">
+                                            <font>
+                                                <Font name="Segoe UI" size="18.0" />
+                                            </font>
+                                            <VBox.margin>
+                                                <Insets top="10.0" />
+                                            </VBox.margin>
+                                        </Label>
+                              <Label layoutX="10.0" layoutY="65.0" text=": ">
+                                 <font>
+                                    <Font name="Segoe UI" size="18.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="103.0" text=": ">
+                                 <font>
+                                    <Font name="Segoe UI" size="18.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="141.0" text=": ">
+                                 <font>
+                                    <Font name="Segoe UI" size="18.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                                    </children>
+                                    <padding>
+                                        <Insets top="40.0" />
+                                    </padding>
+                                </VBox>
+                                <VBox layoutX="350.0" layoutY="10.0" prefHeight="248.0" prefWidth="424.0" HBox.hgrow="NEVER">
+                                    <children>
+                                        <Label fx:id="lblJudul" text="x">
+                                            <font>
+                                                <Font name="Segoe UI" size="18.0" />
+                                            </font>
+                                            <VBox.margin>
+                                                <Insets top="10.0" />
+                                            </VBox.margin>
+                                        </Label>
+                                        <Label fx:id="lblRating" text="x">
+                                            <font>
+                                                <Font name="Segoe UI" size="18.0" />
+                                            </font>
+                                            <VBox.margin>
+                                                <Insets top="10.0" />
+                                            </VBox.margin>
+                                        </Label>
+                                        <Label fx:id="lblStatus" text="x">
+                                            <font>
+                                                <Font name="Segoe UI" size="18.0" />
+                                            </font>
+                                            <VBox.margin>
+                                                <Insets top="10.0" />
+                                            </VBox.margin>
+                                        </Label>
+                              <Label fx:id="lblGenre" layoutX="10.0" layoutY="65.0" text="x">
+                                 <font>
+                                    <Font name="Segoe UI" size="18.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label fx:id="lblDurasi" layoutX="10.0" layoutY="103.0" text="x">
+                                 <font>
+                                    <Font name="Segoe UI" size="18.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label fx:id="lblJumlahEpisode" layoutX="10.0" layoutY="141.0" text="x">
+                                 <font>
+                                    <Font name="Segoe UI" size="18.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                                        <VBox prefHeight="199.0" prefWidth="424.0">
+                                            <children>
+                                                <Label fx:id="lblSinopsis" layoutX="10.0" layoutY="163.0" text="x" wrapText="true">
+                                                    <font>
+                                                        <Font name="Segoe UI" size="18.0" />
+                                                    </font>
+                                                    <VBox.margin>
+                                                        <Insets top="10.0" />
+                                                    </VBox.margin>
+                                       <padding>
+                                          <Insets right="5.0" />
+                                       </padding>
+                                                </Label>
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                    <padding>
+                                        <Insets top="40.0" />
+                                    </padding>
+                                </VBox>
+                            </children>
+                        </HBox>
+                        <HBox prefHeight="612.0" prefWidth="200.0">
+                            <children>
+                                <VBox fx:id="addToThis" prefHeight="612.0" prefWidth="919.0">
+<!--                                    <children>
+                                        <HBox fx:id="hBoxLinkContainer" prefHeight="69.0" prefWidth="915.0">
+                                            <children>
+                                                <HBox prefHeight="43.0" prefWidth="116.0">
+                                                    <children>
+                                                        <Label prefHeight="43.0" prefWidth="90.0" text="Episode">
+                                                            <font>
+                                                                <Font name="Segoe UI" size="18.0" />
+                                                            </font>
+                                                            <padding>
+                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                            </padding>
+                                                            <HBox.margin>
+                                                                <Insets right="10.0" />
+                                                            </HBox.margin>
+                                                        </Label>
+                                                    </children>
+                                                </HBox>
+                                                <HBox prefHeight="100.0" prefWidth="100.0">
+                                                    <children>
+                                                        <Label fx:id="lblEpisode" prefHeight="0.0" text="X">
+                                                            <font>
+                                                                <Font name="Segoe UI" size="18.0" />
+                                                            </font>
+                                                            <padding>
+                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                            </padding>
+                                                            <HBox.margin>
+                                                                <Insets left="2.0" right="2.0" />
+                                                            </HBox.margin>
+                                                        </Label>
+                                                    </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_RIGHT" prefHeight="43.0" prefWidth="677.0">
+                                                    <children>
+                                                        <Label onMouseClicked="#playStreaming" text="Play" textFill="#2600ff">
+                                                            <font>
+                                                                <Font name="Segoe UI" size="18.0" />
+                                                            </font>
+                                                            <padding>
+                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                            </padding>
+                                                        </Label>
+                                                    </children>
+                                                    <HBox.margin>
+                                                        <Insets left="20.0" />
+                                                    </HBox.margin>
+                                                </HBox>
+                                            </children>
+                                            <padding>
+                                                <Insets bottom="20.0" left="50.0" right="20.0" top="20.0" />
+                                            </padding>
+                                        </HBox>
+                                    </children>-->
+                                </VBox>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </children>
+</AnchorPane>

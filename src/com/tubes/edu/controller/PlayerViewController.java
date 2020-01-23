@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package com.tubes.edu.controller;
 
 import java.io.IOException;
 import java.net.URL;
@@ -24,7 +24,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
-import koneksi.koneksiClass;
+import com.tubes.edu.connection.TubesDB;
 
 /**
  * FXML Controller class
@@ -37,13 +37,14 @@ public class PlayerViewController implements Initializable {
     private WebView webViewPlayer;
     @FXML
     private Label lblJudul;
-    private static int idStreaming, idAnime;
-    private static String strUrl;
+    
     @FXML
     private Button btnPrev;
     @FXML
     private Button btnNext;
-    koneksi.koneksiClass conn = new koneksiClass();
+    com.tubes.edu.connection.TubesDB conn = new TubesDB();
+    private static int idStreaming, idAnime;
+    private static String strUrl;
 
     public String getStrUrl() {
         return strUrl;
@@ -88,7 +89,7 @@ public class PlayerViewController implements Initializable {
         engine.load("");
         LinkViewController linkViewController = new LinkViewController();
         linkViewController.setContent(idAnime);
-        Parent fxml = FXMLLoader.load(getClass().getResource("/view/linkView.fxml"));
+        Parent fxml = FXMLLoader.load(getClass().getResource("/com/tubes/edu/view/linkView.fxml"));
         Stage primaryStage;
         primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(fxml);
@@ -130,6 +131,10 @@ public void validasiEpisode(String u) throws SQLException {
         WebEngine engine = webViewPlayer.getEngine();
         engine.reload();
         engine.load(strUrl);
+    }
+    @FXML
+    private void modeFullscreen() {
+        
     }
 
 }

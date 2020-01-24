@@ -9,8 +9,16 @@ package com.tubes.edu.model;
 public class Link {
     private int idAnime, idStreaming,episode;
     private String urlStreaming;
-    private boolean next;
+    private boolean next,prev;
 
+    public boolean isPrev() {
+        return prev;
+    }
+
+    public void setPrev(boolean prev) {
+        this.prev = prev;
+    }
+    
     public boolean isNext() {
         return next;
     }

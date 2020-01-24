@@ -27,6 +27,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import com.tubes.edu.connection.TubesDB;
+import com.tubes.edu.data.TubesSendingData;
+import com.tubes.edu.event.TubesEvent;
+import com.tubes.edu.model.Anime;
+import java.sql.SQLException;
 
 /**
  * FXML Controller class
@@ -54,22 +58,25 @@ public class LinkViewController implements Initializable {
     private Label lblSinopsis;
     @FXML
     private ImageView lblImageView;
-    TubesDB conn = new TubesDB();
-    private static String judul, gambar, genre, sinopsis, durasi, status;
-    private static int id, jumlah, konten, urlId;
-    private static double rating;
+    private TubesEvent tubesEvent;
+    private Anime anime;
 
-    public void masukanData(String judul, String gambar, String sinopsis, String durasi, String status, String genre_anime, int jumlah, int id_anime_tampung, double rating) {
-        LinkViewController.sinopsis = sinopsis;
-        LinkViewController.judul = judul;
-        LinkViewController.gambar = gambar;
-        LinkViewController.durasi = durasi;
-        LinkViewController.status = status;
-        LinkViewController.genre = genre_anime;
-        LinkViewController.jumlah = jumlah;
-        LinkViewController.id = id_anime_tampung;
-        LinkViewController.rating = rating;
+    public void loadAnime() {
+        this.anime = TubesSendingData.getAnime();
     }
+    
+    
+    public LinkViewController() {
+        try {
+            tubesEvent = new TubesEvent(TubesDB.getConnection());
+        } catch (SQLException ex) {
+            Logger.getLogger(HomeViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+    TubesDB conn = new TubesDB();
+    private static int id, jumlah, konten, urlId;
 
     public void masukanDataLink(int urlId) {
         LinkViewController.urlId = urlId;
@@ -148,27 +155,19 @@ public class LinkViewController implements Initializable {
         addToThis.getChildren().add(container);
     }
 
-    public void TampilkanKonten(int i) {
-        conn.cariAnime(i);
-    }
-
-    public void setContent(int i) {
-        LinkViewController.konten = i;
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        TampilkanKonten(konten);
-        final Image tumbnail = new Image(getClass().getResourceAsStream("/com/tubes/edu/asset/tumbnail/" + gambar));
-        lblJudul.setText(judul);
-        lblSinopsis.setText(sinopsis);
-        lblStatus.setText(status);
-        lblGenre.setText(genre);
+        loadAnime();
+        final Image tumbnail = new Image(getClass().getResourceAsStream("/com/tubes/edu/asset/tumbnail/" + anime.getGambar()));
+        lblJudul.setText(anime.getJudul());
+        lblSinopsis.setText(anime.getSinopsis());
+        lblStatus.setText(anime.getStatus());
+        lblGenre.setText(anime.getGenre());
         lblImageView.setImage(tumbnail);
-        lblDurasi.setText(durasi);
-        lblJumlahEpisode.setText(Integer.toString(jumlah));
-        lblRating.setText(Double.toString(rating));
-        for (int i = 1; i <= jumlah; i++) {
+        lblDurasi.setText(anime.getDurasi());
+        lblJumlahEpisode.setText(Integer.toString(anime.getJumlahEpisode()));
+        lblRating.setText(Double.toString(anime.getRating()));
+        for (int i = 1; i <= anime.getJumlahEpisode(); i++) {
             addBox(i);
         }
 
@@ -176,14 +175,8 @@ public class LinkViewController implements Initializable {
 
     @FXML
     private void kembaliKeHomeView(ActionEvent event) throws IOException {
-        Parent fxml = FXMLLoader.load(getClass().getResource("/com/tubes/edu/view/homeView.fxml"));
-        Stage primaryStage;
-        primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(fxml);
-        primaryStage.setTitle("Ans");
-        primaryStage.setScene(scene);
-        primaryStage.resizableProperty().setValue(false);
-        primaryStage.show();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        tubesEvent.changeStage(stage, "homeView");
     }
 
 }

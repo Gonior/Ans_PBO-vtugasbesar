@@ -87,8 +87,8 @@ public class PlayerViewController implements Initializable {
     private void kembaliKeLinkView(ActionEvent event) throws IOException {
         WebEngine engine = webViewPlayer.getEngine();
         engine.load("");
-        LinkViewController linkViewController = new LinkViewController();
-        linkViewController.setContent(idAnime);
+//        LinkViewController linkViewController = new LinkViewController();
+//        linkViewController.setContent(idAnime);
         Parent fxml = FXMLLoader.load(getClass().getResource("/com/tubes/edu/view/linkView.fxml"));
         Stage primaryStage;
         primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();

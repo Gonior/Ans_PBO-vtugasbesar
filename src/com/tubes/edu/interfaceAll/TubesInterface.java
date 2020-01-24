@@ -18,11 +18,11 @@ public interface TubesInterface {
     public void insertUSer(User user) throws SQLException;
     public boolean cariUser(String username) throws SQLException;
     public boolean login(User user) throws SQLException;  
-    public void cariAnime(String judulAnime) throws SQLException;
-    public void cariAnime(int idAnime) throws SQLException;
-    public void cariLink(Anime anime) throws SQLException;
-    public List<Link> getAllLink() throws SQLException;
+    public boolean cariAnime(String judulAnime) throws SQLException;
+    public boolean cariAnime(int idAnime) throws SQLException;
+    public boolean cariLink(Anime anime, int episode) throws SQLException;
+    public List<Link> getAllLink(Anime anime) throws SQLException;
     public List<Anime> getAllAnime() throws SQLException;
     public User getUSer();
-    
+    public Anime getAnime();
 }

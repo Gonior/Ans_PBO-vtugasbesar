@@ -107,26 +107,6 @@ public class TubesEvent implements TubesInterface{
     }
 
     @Override
-    public void cariAnime(int id) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void cariAnime(String judulAnime) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<Link> getAllLink() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void cariLink(Anime anime) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public List<Anime> getAllAnime() throws SQLException {
         Statement st = null;
         List<Anime> list = new ArrayList<>();
@@ -148,7 +128,6 @@ public class TubesEvent implements TubesInterface{
                 anim.setStatus(rs.getString("status"));
                 anim.setGenre(rs.getString("genre_anime"));
                 list.add(anim);
-                jumlahAnime++;
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -182,5 +161,85 @@ public class TubesEvent implements TubesInterface{
                 }
             }
         }
+    }
+
+    @Override
+    public Anime getAnime() {
+        return this.anime;
+    }
+
+    @Override
+    public boolean cariAnime(String judulAnime) throws SQLException {
+        boolean hasil = false;
+        final String query = "SELECT * FROM anime WHERE judul_anime= ?";
+        PreparedStatement st = null;
+        try {
+            st = conn.prepareStatement(query);
+            st.setString(1, judulAnime);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                this.anime.setId(rs.getInt("id_anime"));
+                this.anime.setJudul(rs.getString("judul_anime"));
+                this.anime.setJumlahEpisode(rs.getInt("jumlah_episode"));                
+                this.anime.setRating(rs.getDouble("rating_anime"));
+                this.anime.setGambar(rs.getString("gambar_anime"));
+                this.anime.setSinopsis(rs.getString("sinopsis_anime"));
+                this.anime.setDurasi(rs.getString("durasi_anime"));
+                this.anime.setStatus(rs.getString("status"));
+                this.anime.setGenre(rs.getString("genre_anime"));
+                hasil = true;
+            }
+        } catch (SQLException e) {
+        }
+        
+        return hasil;
+    }
+
+    @Override
+    public boolean cariAnime(int idAnime) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean cariLink(Anime anime, int episode) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Link> getAllLink(Anime anime) throws SQLException {
+        PreparedStatement st = null;
+        List<Link> list = new ArrayList<>();
+        final String query = "SELECT * FROM Streaming WHERE id_anime = ?";
+        try {
+            st = conn.prepareStatement(query);
+            st.setInt(1, anime.getId());
+            ResultSet rs = st.executeQuery();
+            Link link = null;
+            while (rs.next()) {
+                link = new Link();
+                link.setEpisode(rs.getInt("episode_streaming"));
+                link.setIdAnime(rs.getInt("id_anime"));
+                link.setIdStreaming(rs.getInt("id_streaming"));
+                link.setUrlStreaming(rs.getString("url_streaming"));
+                
+                list.add(link);
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        } finally {
+            if(st != null) {
+                try {
+                    st.close();
+                } catch (SQLException exception) {
+                }
+            }
+        }
+        return list;
+    }
+    
+    public boolean cekNext(Link link) {
+        boolean hasil = false;
+        PreparedStatement st = null;
+        return hasil;
     }
 }

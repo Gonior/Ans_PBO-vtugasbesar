@@ -28,7 +28,6 @@ public class TubesDB {
     private static String gambarAnime = null;
     private static int episodeStreaming = 0;
     private static int idAnime = 0;
-    private ArrayList<String> animeData = new ArrayList<>(10);
 
     public String getJudulAnime() {
         return judulAnime;
@@ -46,33 +45,6 @@ public class TubesDB {
         return episodeStreaming;
     }
 
-    public ArrayList<String> getAnimeData() {
-        return animeData;
-    }
-
-    public void tampilAnime() throws SQLException {
-        String query = "SELECT * FROM anime";
-        Statement st = connection.createStatement();
-        ResultSet rs = st.executeQuery(query);
-        while (rs.next()) {
-            String a = rs.getString("judul_anime");
-            animeData.add(a);
-        }
-    }
-
-    public boolean cariAnime(String judul) throws SQLException {
-        boolean hasil = false;
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM anime WHERE judul_anime= ?");
-        preparedStatement.setString(1, judul);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()) {
-            judulAnime = resultSet.getString("judul_anime");
-            gambarAnime = resultSet.getString("gambar_anime");
-            idAnime = resultSet.getInt("id_anime");
-            hasil = true;
-        }
-        return hasil;
-    }
 
     public void cariAnimeId(int id1, int id2) throws SQLException {
 
@@ -205,9 +177,6 @@ public class TubesDB {
         } catch (SQLException e) {
             printSQLException(e);
         }
-        LinkViewController l = new LinkViewController();
-        l.masukanData(judul, gambar, sinopsis, durasi, status, genre, jumlah, id_anime_tampung, rating);
-
     }
 
     public void cariLinkAnime(int id, int eps) {

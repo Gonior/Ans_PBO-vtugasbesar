@@ -28,16 +28,10 @@ public class TubesEvent implements TubesInterface{
     private Anime anime = new Anime();
     private Link link = new Link();
     private User user = new User();   
-    private int jumlahAnime = 0;
     
     public TubesEvent(Connection conn) {
         this.conn = conn;
     }
-
-    public int getJumlahAnime() {
-        return jumlahAnime;
-    }
-    
     
     
     @Override
@@ -202,14 +196,33 @@ public class TubesEvent implements TubesInterface{
 
     @Override
     public boolean cariLink(Anime anime, int episode) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         boolean hasil = false;
+        PreparedStatement st = null;
+        final String query = "SELECT * FROM streaming WHERE id_anime= ? AND episode_streaming = ?";
+        try {
+            st = conn.prepareStatement(query);
+            st.setInt(1, anime.getId());
+            st.setInt(2, episode);
+            ResultSet rs = st.executeQuery();
+            while(rs.next()) {
+                this.link.setEpisode(rs.getInt("episode_streaming"));
+                this.link.setIdAnime(rs.getInt("id_anime"));
+                this.link.setIdStreaming(rs.getInt("id_streaming"));
+                this.link.setUrlStreaming(rs.getString("url_streaming"));
+                this.link.setNext(cekNext(this.link));
+                this.link.setPrev(cekPrev(this.link));
+                hasil = true;
+            }
+        } catch (SQLException e) {
+        }
+        return hasil;
     }
 
     @Override
     public List<Link> getAllLink(Anime anime) throws SQLException {
         PreparedStatement st = null;
         List<Link> list = new ArrayList<>();
-        final String query = "SELECT * FROM Streaming WHERE id_anime = ?";
+        final String query = "SELECT * FROM streaming WHERE id_anime = ? ORDER BY episode_streaming";
         try {
             st = conn.prepareStatement(query);
             st.setInt(1, anime.getId());
@@ -221,7 +234,8 @@ public class TubesEvent implements TubesInterface{
                 link.setIdAnime(rs.getInt("id_anime"));
                 link.setIdStreaming(rs.getInt("id_streaming"));
                 link.setUrlStreaming(rs.getString("url_streaming"));
-                
+                link.setNext(cekNext(link));
+                link.setPrev(cekPrev(link));
                 list.add(link);
             }
         } catch (SQLException e) {
@@ -236,10 +250,43 @@ public class TubesEvent implements TubesInterface{
         }
         return list;
     }
-    
-    public boolean cekNext(Link link) {
+    protected boolean cekNext(Link link) throws SQLException {
         boolean hasil = false;
         PreparedStatement st = null;
+        final String query = "SELECT * FROM streaming WHERE id_anime= ? AND episode_streaming = ?";
+        int episode = link.getEpisode()+1;
+        try {
+            st = conn.prepareStatement(query);
+            st.setInt(1, link.getIdAnime());
+            st.setInt(2, episode);
+            ResultSet rs = st.executeQuery();
+            while(rs.next()) {       
+                hasil = true;
+            }
+        } catch (SQLException e) {
+        }
         return hasil;
+    }
+    protected boolean cekPrev(Link link) throws SQLException {
+        boolean hasil = false;
+        PreparedStatement st = null;
+        final String query = "SELECT * FROM streaming WHERE id_anime= ? AND episode_streaming = ?";
+        int episode = link.getEpisode()-1;
+        try {
+            st = conn.prepareStatement(query);
+            st.setInt(1, link.getIdAnime());
+            st.setInt(2, episode);
+            ResultSet rs = st.executeQuery();
+            while(rs.next()) {
+                hasil = true;
+            }
+        } catch (SQLException e) {
+        }
+        return hasil;
+    }
+
+    @Override
+    public Link getLink() {
+        return link;
     }
 }

@@ -25,6 +25,10 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import com.tubes.edu.connection.TubesDB;
+import com.tubes.edu.data.TubesSendingData;
+import com.tubes.edu.event.TubesEvent;
+import com.tubes.edu.model.Anime;
+import com.tubes.edu.model.Link;
 
 /**
  * FXML Controller class
@@ -37,104 +41,85 @@ public class PlayerViewController implements Initializable {
     private WebView webViewPlayer;
     @FXML
     private Label lblJudul;
-    
     @FXML
     private Button btnPrev;
     @FXML
     private Button btnNext;
-    com.tubes.edu.connection.TubesDB conn = new TubesDB();
-    private static int idStreaming, idAnime;
-    private static String strUrl;
-
-    public String getStrUrl() {
-        return strUrl;
-    }
-
-    public void setStrUrl(String strUrl) {
-        PlayerViewController.strUrl = strUrl;
-    }
-
     @FXML
     private HBox mainPlayer;
+    private TubesEvent tubesEvent;
+    private Anime anime;
+    private Link link;
 
-    /**
-     * Initializes the controller class.
-     *
-     * @param idStreaming
-     * @param idAnime
-     */
-    public void setPlayer(int idStreaming, int idAnime) {
-        PlayerViewController.idStreaming = idStreaming;
-        PlayerViewController.idAnime = idAnime;
+    public void loadData() {
+        this.anime = TubesSendingData.getAnime();
+        this.link = TubesSendingData.getLink();
+    }
+
+    public PlayerViewController() {
+        try {
+            tubesEvent = new TubesEvent(TubesDB.getConnection());
+        } catch (SQLException ex) {
+            Logger.getLogger(HomeViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        loadData();
         try {
-            conn.cariUrlStreaming(idStreaming);
-            conn.cariAnimeId(idAnime, idStreaming);
-            validasiEpisode(strUrl);
+            playAnime(anime, link);
         } catch (SQLException ex) {
             Logger.getLogger(PlayerViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        lblJudul.setText(conn.getJudulAnime() + " Episode " + conn.getEpisodeStreaming());
-        WebEngine engine = webViewPlayer.getEngine();
-        engine.reload();
-        engine.load(strUrl);
     }
 
     @FXML
     private void kembaliKeLinkView(ActionEvent event) throws IOException {
         WebEngine engine = webViewPlayer.getEngine();
         engine.load("");
-//        LinkViewController linkViewController = new LinkViewController();
-//        linkViewController.setContent(idAnime);
-        Parent fxml = FXMLLoader.load(getClass().getResource("/com/tubes/edu/view/linkView.fxml"));
-        Stage primaryStage;
-        primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(fxml);
-        primaryStage.setTitle("Ans");
-        primaryStage.setScene(scene);
-        primaryStage.resizableProperty().setValue(false);
-        primaryStage.show();
+        Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        tubesEvent.changeStage(primaryStage, "linkView");
+        TubesSendingData.setAnime(anime);
     }
-public void validasiEpisode(String u) throws SQLException {
-    if (conn.isNext(u)) {
-                btnNext.setDisable(false);
-            } else {
-                btnNext.setDisable(true);
-            }
-            if (conn.isPrev(u)) {
-                btnPrev.setDisable(false);
-            } else {
-                btnPrev.setDisable(true);
-            }
-}
+
+    public void validasiEpisode(Link link) throws SQLException {
+        if (link.isNext()) {
+            btnNext.setDisable(false);
+        } else {
+            btnNext.setDisable(true);
+        }
+        if (link.isPrev()) {
+            btnPrev.setDisable(false);
+        } else {
+            btnPrev.setDisable(true);
+        }
+    }
+
     @FXML
     private void epsPrev(ActionEvent event) throws SQLException {
-        setPlayer(conn.prevEpisode(strUrl), idAnime);
-        conn.cariUrlStreaming(idStreaming);
-        conn.cariAnimeId(idAnime, idStreaming);
-        validasiEpisode(strUrl);
-        lblJudul.setText(conn.getJudulAnime() + " Episode " + conn.getEpisodeStreaming());
-        WebEngine engine = webViewPlayer.getEngine();
-        engine.load(strUrl);
+        if(tubesEvent.cariLink(anime, link.getEpisode()-1)) {
+            TubesSendingData.setLink(tubesEvent.getLink());
+        }
+        loadData();
+        playAnime(anime, link);
     }
 
     @FXML
     private void epsNext(ActionEvent event) throws SQLException {
-        setPlayer(conn.nextEpisode(strUrl), idAnime);
-        conn.cariUrlStreaming(idStreaming);
-        conn.cariAnimeId(idAnime, idStreaming);
-        validasiEpisode(strUrl);        
-        lblJudul.setText(conn.getJudulAnime() + " Episode " + conn.getEpisodeStreaming());
+        if(tubesEvent.cariLink(anime, link.getEpisode()+1)) {
+            TubesSendingData.setLink(tubesEvent.getLink());
+        }
+        loadData();
+        playAnime(anime, link);
+    }
+
+    public void playAnime(Anime anime, Link link) throws SQLException {
+        validasiEpisode(link);
+        lblJudul.setText(anime.getJudul() + " Episode " + link.getEpisode());
         WebEngine engine = webViewPlayer.getEngine();
         engine.reload();
-        engine.load(strUrl);
-    }
-    @FXML
-    private void modeFullscreen() {
-        
+        engine.load(link.getUrlStreaming());
     }
 
 }

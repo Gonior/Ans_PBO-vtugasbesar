@@ -25,4 +25,5 @@ public interface TubesInterface {
     public List<Anime> getAllAnime() throws SQLException;
     public User getUSer();
     public Anime getAnime();
+    public Link getLink();
 }

@@ -12,12 +12,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -30,7 +27,9 @@ import com.tubes.edu.connection.TubesDB;
 import com.tubes.edu.data.TubesSendingData;
 import com.tubes.edu.event.TubesEvent;
 import com.tubes.edu.model.Anime;
+import com.tubes.edu.model.Link;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * FXML Controller class
@@ -43,7 +42,6 @@ public class LinkViewController implements Initializable {
     private VBox addToThis;
     @FXML
     private Label lblJudul;
-
     @FXML
     private Label lblRating;
     @FXML
@@ -65,6 +63,16 @@ public class LinkViewController implements Initializable {
         this.anime = TubesSendingData.getAnime();
     }
     
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        loadAnime();
+        try {
+            ambilDataLink();
+        } catch (SQLException ex) {
+            Logger.getLogger(LinkViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
     
     public LinkViewController() {
         try {
@@ -74,15 +82,7 @@ public class LinkViewController implements Initializable {
         }
     }
     
-    
-    TubesDB conn = new TubesDB();
-    private static int id, jumlah, konten, urlId;
-
-    public void masukanDataLink(int urlId) {
-        LinkViewController.urlId = urlId;
-    }
-
-    public void addBox(int a) {
+    public void addBox(Link link) {
         HBox hBox, addFontToThis, hBox0, container;
         Button button;
 
@@ -110,7 +110,7 @@ public class LinkViewController implements Initializable {
         addFontToThis.setPrefWidth(100.0);
 
         lblEpisode.setPrefHeight(0.0);
-        lblEpisode.setText(Integer.toString(a));
+        lblEpisode.setText(Integer.toString(link.getEpisode()));
         lblEpisode.setFont(new Font("Segoe UI", 18.0));
         lblEpisode.setPadding(new Insets(10.0));
         HBox.setMargin(lblEpisode, new Insets(0.0, 2.0, 0.0, 2.0));
@@ -119,25 +119,12 @@ public class LinkViewController implements Initializable {
         hBox0.setPrefHeight(43.0);
         hBox0.setPrefWidth(677.0);
 
-        int episodeSelected = a;
         button.setOnAction((ActionEvent event) -> {
-            
-            conn.cariLinkAnime(id, episodeSelected);
-            PlayerViewController player = new PlayerViewController();
-            player.setPlayer(urlId, id);
-            Parent fxml = null;
             try {
-                fxml = FXMLLoader.load(getClass().getResource("/com/tubes/edu/view/playerView.fxml"));
+                nonton(anime, link, event);
             } catch (IOException ex) {
                 Logger.getLogger(LinkViewController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Stage primaryStage;
-            primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(fxml);
-            primaryStage.setTitle("Ans");
-            primaryStage.setScene(scene);
-            primaryStage.resizableProperty().setValue(false);
-            primaryStage.show();
         });
         button.setStyle("-fx-background-color: transparent;");
         button.setTextFill(javafx.scene.paint.Color.valueOf("#2600ff"));
@@ -154,10 +141,9 @@ public class LinkViewController implements Initializable {
         container.getChildren().add(hBox0);
         addToThis.getChildren().add(container);
     }
-
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        loadAnime();
+    
+    public void ambilDataLink() throws SQLException {
+        List<Link> list = tubesEvent.getAllLink(anime);
         final Image tumbnail = new Image(getClass().getResourceAsStream("/com/tubes/edu/asset/tumbnail/" + anime.getGambar()));
         lblJudul.setText(anime.getJudul());
         lblSinopsis.setText(anime.getSinopsis());
@@ -167,10 +153,15 @@ public class LinkViewController implements Initializable {
         lblDurasi.setText(anime.getDurasi());
         lblJumlahEpisode.setText(Integer.toString(anime.getJumlahEpisode()));
         lblRating.setText(Double.toString(anime.getRating()));
-        for (int i = 1; i <= anime.getJumlahEpisode(); i++) {
-            addBox(i);
-        }
-
+        list.forEach((link) -> {
+            addBox(link);
+        });
+    }
+    public void nonton(Anime anime, Link link, ActionEvent event) throws IOException {
+        TubesSendingData.setLink(link);
+        TubesSendingData.setAnime(anime);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        tubesEvent.changeStage(stage, "playerView");
     }
 
     @FXML

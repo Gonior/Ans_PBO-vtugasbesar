@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
-<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
@@ -13,10 +12,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="644.0" prefWidth="1066.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LinkViewController">
-    <stylesheets>
-        <URL value="@/asset/linkview.css" />
-    </stylesheets>
+<AnchorPane id="AnchorPane" prefHeight="644.0" prefWidth="1066.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.edu.controller.LinkViewController">
+    
     <children>
         <VBox prefHeight="677.0" prefWidth="135.0" style="-fx-background-color: white;">
             <children>
@@ -245,9 +242,9 @@
                                 </VBox>
                             </children>
                         </HBox>
-                        <HBox prefHeight="612.0" prefWidth="200.0">
+                        <HBox prefWidth="200.0">
                             <children>
-                                <VBox fx:id="addToThis" prefHeight="612.0" prefWidth="919.0">
+                                <VBox fx:id="addToThis" prefWidth="919.0">
 <!--                                    <children>
                                         <HBox fx:id="hBoxLinkContainer" prefHeight="69.0" prefWidth="915.0">
                                             <children>

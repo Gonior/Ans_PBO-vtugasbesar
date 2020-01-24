@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane id="AnchorPane" prefHeight="644.0" prefWidth="1066.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PlayerViewController">
+<AnchorPane id="AnchorPane" prefHeight="644.0" prefWidth="1066.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.edu.controller.PlayerViewController">
    <children>
       <VBox prefHeight="646.0" prefWidth="1060.0">
          <children>
@@ -57,7 +57,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" style="-fx-background-color: #7AC5CD;">
                <children>
-                  <Label fx:id="lblJudul" text="Di sini nanti ada judul anime" textFill="WHITE">
+                  <Label fx:id="lblJudul" prefHeight="28.0" prefWidth="739.0" text="Di sini nanti ada judul anime" textFill="WHITE">
                      <font>
                         <Font name="Segoe UI" size="22.0" />
                      </font>

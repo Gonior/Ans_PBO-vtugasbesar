@@ -1,0 +1,29 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jan 16, 2020, 4:41:31 AM
+    Author     : naniya
+*/
+
+.btn-aktiv {
+    -fx-background-color: transparent; 
+    -fx-text-fill:  #37c5cd; 
+    -fx-border-width: 0px 0px 2px 0px; 
+    -fx-border-color:  #37c5cd;
+    -fx-font-size: 19px;
+    -fx-margin: 5px 5px 5px 5px;
+    padding: 10px;
+}
+
+.btn-nonaktiv {
+    -fx-background-color: transparent; 
+    -fx-text-fill:  #37c5cda2; 
+    -fx-border-width: 0px 0px 2px 0px; 
+    -fx-border-color:  #37c5cda2;
+    -fx-font-size: 19px;
+    -fx-margin: 5px 5px 5px 5px;
+    padding: 10px;
+}

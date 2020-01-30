@@ -289,4 +289,30 @@ public class TubesEvent implements TubesInterface{
     public Link getLink() {
         return link;
     }
+
+    @Override
+    public void insertAnime(Anime anime) throws SQLException {
+        final String query = "INSERT INTO anime(id_anime, judul_anime, jumlah_episode, rating_anime, gambar_anime, sinopsis_anime, durasi_anime, status, genre_anime) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)";
+        PreparedStatement st = null;
+        try {
+            st = conn.prepareStatement(query);
+            st.setInt(1, anime.getId());
+            st.setString(2, anime.getJudul());
+            st.setInt(3, anime.getJumlahEpisode());
+            st.setDouble(4, anime.getRating());
+            st.setString(5, anime.getGambar());
+            st.setString(6, anime.getSinopsis());
+            st.setString(7, anime.getDurasi());
+            st.setString(8, anime.getStatus());
+            st.setString(9, anime.getGenre());
+            st.executeUpdate();
+        } catch (SQLException e) {
+        }
+        
+    }
+
+    @Override
+    public void insertLink(Link link) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

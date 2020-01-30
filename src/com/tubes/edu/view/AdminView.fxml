@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="561.0" prefWidth="823.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.edu.controller.AdminViewController">
+   <children>
+      <ImageView fx:id="lihatGambar" fitHeight="187.0" fitWidth="128.0" layoutX="634.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../asset/tumbnail/no-image-available.jpg" />
+         </image></ImageView>
+      <Button fx:id="pilihGambar" layoutX="651.0" layoutY="234.0" mnemonicParsing="false" onAction="#pilihGambarClicked" text="Pilih Gambar" />
+      <VBox layoutX="20.0" layoutY="57.0" prefHeight="174.0" prefWidth="599.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="599.0" spacing="20.0">
+               <children>
+                  <Label prefHeight="15.0" prefWidth="139.0" text="Judul " />
+                  <TextField fx:id="judulTxt" onKeyReleased="#judulTyped" prefHeight="25.0" prefWidth="286.0" />
+                  <Label fx:id="judulLbl" prefHeight="15.0" prefWidth="231.0" text="captionlabel" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="33.0" prefWidth="599.0" spacing="20.0">
+               <children>
+                  <Label prefHeight="15.0" prefWidth="141.0" text="Durasi" />
+                  <TextField fx:id="duraiTxt" onKeyReleased="#durasiTyped" prefHeight="25.0" prefWidth="286.0" />
+                  <Label fx:id="durasiLbl" prefHeight="15.0" prefWidth="231.0" text="label" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="43.0" prefHeight="33.0" prefWidth="599.0" spacing="20.0">
+               <children>
+                  <Label prefHeight="15.0" prefWidth="142.0" text="Jumlah episode" />
+                  <TextField fx:id="jumlahEpTxt" onKeyReleased="#jumlahEpTyped" prefHeight="25.0" prefWidth="286.0" />
+                  <Label fx:id="jumlahEpLbl" prefHeight="15.0" prefWidth="231.0" text="label" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="76.0" prefHeight="33.0" prefWidth="599.0" spacing="20.0">
+               <children>
+                  <Label prefHeight="15.0" prefWidth="143.0" text="Rating" />
+                  <TextField fx:id="ratingTxt" onKeyReleased="#ratingTyped" prefHeight="25.0" prefWidth="286.0" />
+                  <Label fx:id="ratingLbl" prefHeight="15.0" prefWidth="231.0" text="label" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="142.0" prefHeight="33.0" prefWidth="599.0" spacing="20.0">
+               <children>
+                  <Label prefHeight="15.0" prefWidth="128.0" text="Status" />
+                  <RadioButton fx:id="completed" mnemonicParsing="false" onAction="#statusPilih" text="Completed">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="Status" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="onGoing" layoutX="95.0" layoutY="18.0" mnemonicParsing="false" onAction="#statusPilih" prefHeight="18.0" prefWidth="129.0" text="On Going" toggleGroup="$Status" />
+                  <Label fx:id="statusLbl" prefHeight="15.0" prefWidth="190.0" text="Label" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Label fx:id="genreLbl" layoutX="64.0" layoutY="335.0" prefHeight="15.0" prefWidth="218.0" text="label" />
+      <TextArea fx:id="sinopsisTxt" layoutX="153.0" layoutY="364.0" onKeyTyped="#sinopsisTyped" prefHeight="81.0" prefWidth="346.0" />
+      <Label layoutX="25.0" layoutY="364.0" prefHeight="15.0" prefWidth="143.0" text="Sinopsis" />
+      <Label fx:id="sinopsisLbl" layoutX="514.0" layoutY="364.0" prefHeight="15.0" prefWidth="231.0" text="label" />
+      <Button layoutX="168.0" layoutY="504.0" mnemonicParsing="false" onAction="#simpan" text="Simpan" />
+      <Button layoutX="251.0" layoutY="504.0" mnemonicParsing="false" onAction="#resetBtn" text="Reset" />
+      <GridPane layoutX="18.0" layoutY="231.0" prefHeight="97.0" prefWidth="599.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="136.0" minWidth="10.0" prefWidth="47.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="149.0" minWidth="5.0" prefWidth="112.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="149.0" minWidth="10.0" prefWidth="142.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="149.0" minWidth="10.0" prefWidth="149.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="149.0" minWidth="10.0" prefWidth="149.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Genre" />
+            <CheckBox fx:id="genre1cb" mnemonicParsing="false" onAction="#genrePilih" text="Romance" GridPane.columnIndex="1" />
+            <CheckBox fx:id="genre2cb" mnemonicParsing="false" onAction="#genrePilih" text="School" GridPane.columnIndex="2" />
+            <CheckBox fx:id="genre8cb" mnemonicParsing="false" onAction="#genrePilih" text="Fantasy" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <CheckBox fx:id="genre5cb" mnemonicParsing="false" onAction="#genrePilih" text="Action" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <CheckBox fx:id="genre9cb" mnemonicParsing="false" onAction="#genrePilih" text="Harem" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <CheckBox fx:id="genre6cb" mnemonicParsing="false" onAction="#genrePilih" text="Adventure" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <CheckBox fx:id="genre7cb" mnemonicParsing="false" onAction="#genrePilih" text="Ecchi" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <CheckBox fx:id="genre10cb" mnemonicParsing="false" onAction="#genrePilih" text="Horror" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <CheckBox fx:id="genre11cb" mnemonicParsing="false" onAction="#genrePilih" text="Josei" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <CheckBox fx:id="genre4cb" mnemonicParsing="false" onAction="#genrePilih" text="Comedy" GridPane.columnIndex="4" />
+            <CheckBox fx:id="genre3cb" mnemonicParsing="false" onAction="#genrePilih" text="Seinen" GridPane.columnIndex="3" />
+            <CheckBox fx:id="genre12cb" mnemonicParsing="false" onAction="#genrePilih" text="Magic" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <CheckBox fx:id="genre13cb" mnemonicParsing="false" onAction="#genrePilih" text="Parody" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <CheckBox fx:id="genre14cb" mnemonicParsing="false" onAction="#genrePilih" text="Sci-fi" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <CheckBox fx:id="genre15cb" mnemonicParsing="false" onAction="#genrePilih" text="Slice of life" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <CheckBox fx:id="genre16cb" mnemonicParsing="false" onAction="#genrePilih" text="Sport" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

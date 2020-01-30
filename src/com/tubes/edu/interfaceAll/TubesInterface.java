@@ -16,6 +16,8 @@ import javafx.stage.Stage;
 public interface TubesInterface {
     public void changeStage(Stage primaryStage, String source) throws IOException;
     public void insertUSer(User user) throws SQLException;
+    public void insertAnime(Anime anime) throws SQLException;
+    public void insertLink(Link link) throws SQLException;
     public boolean cariUser(String username) throws SQLException;
     public boolean login(User user) throws SQLException;  
     public boolean cariAnime(String judulAnime) throws SQLException;

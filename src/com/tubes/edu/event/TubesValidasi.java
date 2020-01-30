@@ -6,18 +6,21 @@
 package com.tubes.edu.event;
 
 import com.tubes.edu.connection.TubesDB;
+import com.tubes.edu.model.Anime;
 import com.tubes.edu.model.PesanErrorValidasi;
 import com.tubes.edu.model.User;
 import java.sql.SQLException;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
 public class TubesValidasi {
-        
+
     private static User user;
     private static PesanErrorValidasi pesanError;
     private static TubesEvent tubesEvent;
-    
-    
+
     public TubesValidasi(User user) throws SQLException {
         TubesValidasi.user = user;
         tubesEvent = new TubesEvent(TubesDB.getConnection());
@@ -32,13 +35,14 @@ public class TubesValidasi {
         }
     }
 
-    
+    public TubesValidasi() {
+    }
+
     public static PesanErrorValidasi getPesanError() {
         return pesanError;
     }
-    
-    
-    public static boolean cekAngka(String s) {
+
+    private static boolean cekAngka(String s) {
         char[] chars = s.toCharArray();
         boolean cek = false;
         for (char c : chars) {
@@ -49,7 +53,7 @@ public class TubesValidasi {
         return cek;
     }
 
-    public static boolean cekSpasi(String s) {
+    private static boolean cekSpasi(String s) {
         int flag = 0;
         boolean hasil = false;
         for (int i = 0; i < s.length(); i++) {
@@ -62,16 +66,16 @@ public class TubesValidasi {
         }
         return hasil;
     }
-    
-    protected static boolean validasiNama(String s) {
-        boolean hasil =false;
+
+    private static boolean validasiNama(String s) {
+        boolean hasil = false;
         pesanError = new PesanErrorValidasi();
         if (s.isEmpty()) {
             pesanError.setHeaderPesan("Form error");
             pesanError.setIsiPesan("Masukan nama anda");
             pesanError.setTipePesan(Alert.AlertType.ERROR);
         } else if (cekAngka(s)) {
-            
+
             pesanError.setHeaderPesan("Form error");
             pesanError.setIsiPesan("Nama Tidak valid");
             pesanError.setTipePesan(Alert.AlertType.ERROR);
@@ -80,11 +84,17 @@ public class TubesValidasi {
         }
         return hasil;
     }
-    protected static boolean validasiUsername(String s) throws SQLException {
-        boolean hasil =false;
+
+    private String kapitalMaker(String s) {
+        String temp = s.substring(0, 1).toUpperCase() + s.substring(1);
+        return temp;
+    }
+
+    private static boolean validasiUsername(String s) throws SQLException {
+        boolean hasil = false;
         pesanError = new PesanErrorValidasi();
         if (s.isEmpty()) {
-            
+
             pesanError.setHeaderPesan("Form error");
             pesanError.setIsiPesan("Masukan Username anda");
             pesanError.setTipePesan(Alert.AlertType.ERROR);
@@ -92,7 +102,7 @@ public class TubesValidasi {
             pesanError.setHeaderPesan("Form error");
             pesanError.setIsiPesan("Username Tidak valid");
             pesanError.setTipePesan(Alert.AlertType.ERROR);
-        }else if(tubesEvent.cariUser(s)) {
+        } else if (tubesEvent.cariUser(s)) {
             pesanError.setHeaderPesan("Form error");
             pesanError.setIsiPesan("Username sudah digunakan");
             pesanError.setTipePesan(Alert.AlertType.ERROR);
@@ -101,21 +111,20 @@ public class TubesValidasi {
         }
         return hasil;
     }
-    
-    protected static boolean validasiPassword(String s1, String s2) {
-        boolean hasil = false ;
+
+    private static boolean validasiPassword(String s1, String s2) {
+        boolean hasil = false;
         pesanError = new PesanErrorValidasi();
         if (s1.isEmpty()) {
             pesanError.setHeaderPesan("Form error");
             pesanError.setIsiPesan("Masukan Password anda");
-            pesanError.setTipePesan(Alert.AlertType.ERROR);  
-        }else if(s1.length()<6) {
+            pesanError.setTipePesan(Alert.AlertType.ERROR);
+        } else if (s1.length() < 6) {
             pesanError.setHeaderPesan("Form error");
             pesanError.setIsiPesan("Password harus lebih dari 6 karakter");
-            pesanError.setTipePesan(Alert.AlertType.ERROR);  
-            
-        }
-        else if (s2.isEmpty()) {
+            pesanError.setTipePesan(Alert.AlertType.ERROR);
+
+        } else if (s2.isEmpty()) {
             pesanError.setHeaderPesan("Form error");
             pesanError.setIsiPesan("Ketik ulang password anda");
             pesanError.setTipePesan(Alert.AlertType.ERROR);
@@ -128,5 +137,146 @@ public class TubesValidasi {
         }
         return hasil;
     }
-    
+
+    private String durasiMaker(String durasi) {
+        int angka = Integer.parseInt(durasi);
+        String str = "";
+        int jam = (int) angka / 60;
+        int menit = angka % 60;
+        if (menit <= 0) {
+            str = jam + " Jam ";
+        } else if (jam <= 0) {
+            str = menit + " Menit";
+        } else {
+            str = jam + " Jam " + menit + " Menit";
+        }
+        return str;
+    }
+
+    private void genreMaker(String str) {
+        String temp = "";
+        int panjangStr = str.length() - 1;
+        for (int i = 0; i < panjangStr; i++) {
+            temp += str.charAt(i);
+        }
+        str = temp;
+    }
+
+    public void validasiJudulAnime(Anime anime, TextField txt, Label captionLabel) {
+        if (txt.getText().trim().equals("")) {
+            captionLabel.setText("Judul harus diisi");
+            anime.setJudul("");
+        } else {
+            captionLabel.setText("");
+            String judul = kapitalMaker(txt.getText().trim());
+            anime.setJudul(judul);
+        }
+    }
+
+    public void validasiJumlahEpisode(Anime anime, TextField txt, Label captionLabel) {
+
+        if (!txt.getText().trim().equals("")) {
+            try {
+                int jumlahEpisode = Integer.parseInt(txt.getText());
+                captionLabel.setText("");
+                anime.setJumlahEpisode(jumlahEpisode);
+            } catch (NumberFormatException e) {
+                captionLabel.setText("Masukan tipe data integer");
+                anime.setJumlahEpisode(0);
+            }
+        } else {
+            captionLabel.setText("Masukan Jumlah episode");
+            anime.setJumlahEpisode(0);
+        }
+    }
+
+    public void validasiRatingAnime(Anime anime, TextField txt, Label captionLabel) {
+        if (!txt.getText().trim().equals("")) {
+
+            try {
+                double rating = Double.parseDouble(txt.getText());
+                try {
+                    if (rating > 10) {
+                        captionLabel.setText("Skala 1 - 10");
+                        anime.setRating(0.0);
+                    } else {
+                        captionLabel.setText("");
+                        anime.setRating(rating);
+                    }
+                } catch (NumberFormatException e) {
+                        captionLabel.setText("Skala 1 - 10");
+                        anime.setRating(0.0);
+                }
+                
+            } catch (NumberFormatException e) {
+                captionLabel.setText("Masukan tipe data double");
+                anime.setRating(0.0);
+            }
+        } else {
+            captionLabel.setText("Masukan Rating anime");
+            anime.setRating(0.0);
+        }
+    }
+
+    public void validasiDurasiAnime(Anime anime, TextField txt, Label captionLabel) {
+        if (!txt.getText().trim().equals("")) {
+            try {
+                int a = Integer.parseInt(txt.getText());
+                String durasi = durasiMaker(txt.getText().trim());
+                anime.setDurasi(durasi);
+                captionLabel.setText("");
+            } catch (NumberFormatException e) {
+                captionLabel.setText("Masukan tipe data integer");
+                anime.setDurasi("");
+            }
+        } else {
+            captionLabel.setText("Masukan durasi anime");
+            anime.setDurasi("");
+        }
+
+    }
+
+    public void validasiSinopsis(Anime anime, TextArea txt, Label captionLabel) {
+        if (!txt.getText().trim().equals("")) {
+            if (txt.getText().length() >= 255) {
+                captionLabel.setText("Tidak lebih dari 255 karakter");
+                anime.setSinopsis("");
+            } else {
+                captionLabel.setText("");
+                anime.setSinopsis(txt.getText());
+            }
+        } else {
+            captionLabel.setText("Masukan sinopsis");
+            anime.setSinopsis("");
+        }
+    }
+
+    public void validasiGenre(Anime anime, String genre, Label captionLabel) {
+        if (genre.equals("")) {
+            captionLabel.setText("Setidaknya centang salah satu genre");
+            anime.setGenre("");
+        } else {
+            captionLabel.setText("");
+            genreMaker(genre);
+            anime.setGenre(genre);
+        }
+    }
+
+    public void validasiStatus(Anime anime, String status, Label captionLabel) {
+        if (status.equals("")) {
+            captionLabel.setText("Setidaknya centang salah satu status");
+            anime.setStatus("");
+        } else {
+            captionLabel.setText("");
+            anime.setStatus(status);
+
+        }
+    }
+
+    public boolean validasiAnime(Anime anime) {
+        boolean hasil = false;
+        hasil = !anime.getJudul().equals("");
+        return hasil;
+    }
+
 }

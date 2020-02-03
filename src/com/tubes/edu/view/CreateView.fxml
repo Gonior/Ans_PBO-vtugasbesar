@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="576.0" prefWidth="930.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.edu.view.CreateViewController">
+   <children>
+      <Label layoutX="35.0" layoutY="76.0" text="Judul">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <TextField layoutX="90.0" layoutY="75.0" prefHeight="28.0" prefWidth="463.0" />
+      <Label layoutX="26.0" layoutY="126.0" text="Sinopsis">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <TextArea layoutX="91.0" layoutY="120.0" prefHeight="76.0" prefWidth="463.0" />
+      <Label layoutX="32.0" layoutY="215.0" text="Rating">
+         <font>
+            <Font name="Segoe UI" size="14.0" />
+         </font></Label>
+      <MenuButton layoutX="94.0" layoutY="296.0" mnemonicParsing="false" text="Pilih">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Completed" />
+          <MenuItem mnemonicParsing="false" text="pilih" />
+        </items>
+         <font>
+            <Font size="14.0" />
+         </font>
+      </MenuButton>
+      <Button layoutX="830.0" layoutY="528.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="77.0" text="Selesai">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="418.0" layoutY="489.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" text="Cek" />
+      <Button layoutX="486.0" layoutY="489.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="53.0" text="Reset" />
+      <GridPane layoutX="95.0" layoutY="345.0" prefHeight="97.0" prefWidth="497.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="149.0" minWidth="5.0" prefWidth="86.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="149.0" minWidth="10.0" prefWidth="83.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="180.0" minWidth="10.0" prefWidth="85.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="167.0" minWidth="10.0" prefWidth="72.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <CheckBox fx:id="genre1cb" mnemonicParsing="false" onAction="#genrePilih" text="Romance">
+               <font>
+                  <Font name="Segoe UI" size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="genre2cb" mnemonicParsing="false" onAction="#genrePilih" text="School" GridPane.columnIndex="1">
+               <font>
+                  <Font name="Segoe UI" size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="genre8cb" mnemonicParsing="false" onAction="#genrePilih" text="Fantasy" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Segoe UI" size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="genre5cb" mnemonicParsing="false" onAction="#genrePilih" text="Action" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Segoe UI" size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="genre9cb" mnemonicParsing="false" onAction="#genrePilih" text="Harem" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Segoe UI" size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="genre6cb" mnemonicParsing="false" onAction="#genrePilih" text="Adventure" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Segoe UI" size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="genre7cb" mnemonicParsing="false" onAction="#genrePilih" text="Ecchi" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Segoe UI" size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="genre10cb" mnemonicParsing="false" onAction="#genrePilih" text="Horror" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Segoe UI" size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="genre11cb" mnemonicParsing="false" onAction="#genrePilih" text="Josei" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Segoe UI" size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="genre4cb" mnemonicParsing="false" onAction="#genrePilih" text="Comedy" GridPane.columnIndex="3">
+               <font>
+                  <Font name="Segoe UI" size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="genre3cb" mnemonicParsing="false" onAction="#genrePilih" text="Seinen" GridPane.columnIndex="2">
+               <font>
+                  <Font name="Segoe UI" size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="genre12cb" mnemonicParsing="false" onAction="#genrePilih" text="Magic" GridPane.columnIndex="3" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Segoe UI" size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="genre13cb" mnemonicParsing="false" onAction="#genrePilih" text="Parody" GridPane.rowIndex="3">
+               <font>
+                  <Font name="Segoe UI" size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="genre14cb" mnemonicParsing="false" onAction="#genrePilih" text="Sci-fi" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <font>
+                  <Font name="Segoe UI" size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="genre15cb" mnemonicParsing="false" onAction="#genrePilih" text="Slice of life" GridPane.columnIndex="2" GridPane.rowIndex="3">
+               <font>
+                  <Font name="Segoe UI" size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="genre16cb" mnemonicParsing="false" onAction="#genrePilih" text="Sport" GridPane.columnIndex="3" GridPane.rowIndex="3">
+               <font>
+                  <Font name="Segoe UI" size="14.0" />
+               </font>
+            </CheckBox>
+         </children>
+      </GridPane>
+      <Label layoutX="29.0" layoutY="347.0" text="Genre">
+         <font>
+            <Font name="Segoe UI" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="25.0" layoutY="14.0" text="Create New Anime">
+         <font>
+            <Font name="Segoe UI Bold" size="18.0" />
+         </font>
+      </Label>
+      <Separator layoutX="26.0" layoutY="41.0" prefWidth="200.0" />
+      <ImageView fitHeight="117.0" fitWidth="112.0" layoutX="724.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Image/Pilih%20Gambar.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="723.0" layoutY="210.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="107.0" text="Pilih Gambar">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Label layoutX="31.0" layoutY="260.0">
+         <font>
+            <Font name="Segoe UI" size="14.0" />
+         </font>
+      </Label>
+      <TextField layoutX="91.0" layoutY="213.0" prefHeight="28.0" prefWidth="463.0" />
+      <Label layoutX="30.0" layoutY="302.0" text="Status">
+         <font>
+            <Font name="Segoe UI" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="20.0" layoutY="260.0" text="Jumlah Eps">
+         <font>
+            <Font name="Segoe UI" size="14.0" />
+         </font>
+      </Label>
+      <TextField layoutX="91.0" layoutY="255.0" prefHeight="28.0" prefWidth="463.0" />
+      <Label layoutX="568.0" layoutY="80.0" text="Label" textFill="RED">
+         <font>
+            <Font name="Segoe UI" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="569.0" layoutY="145.0" text="Label" textFill="RED">
+         <font>
+            <Font name="Segoe UI" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="569.0" layoutY="217.0" text="Label" textFill="RED">
+         <font>
+            <Font name="Segoe UI" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="569.0" layoutY="260.0" text="Label" textFill="RED">
+         <font>
+            <Font name="Segoe UI" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="175.0" layoutY="302.0" text="Label" textFill="RED">
+         <font>
+            <Font name="Segoe UI" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="95.0" layoutY="454.0" text="Label" textFill="RED">
+         <font>
+            <Font name="Segoe UI" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="760.0" layoutY="251.0" text="Label" textFill="RED">
+         <font>
+            <Font name="Segoe UI" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="612.0" layoutY="88.0" />
+      <FontAwesomeIcon fill="#00ff44" glyphName="CHECK" layoutX="554.0" layoutY="93.0" />
+      <FontAwesomeIcon fill="#00ff44" glyphName="CHECK" layoutX="555.0" layoutY="159.0" />
+      <FontAwesomeIcon fill="#00ff44" glyphName="CHECK" layoutX="555.0" layoutY="231.0" />
+      <FontAwesomeIcon fill="#00ff44" glyphName="CHECK" layoutX="556.0" layoutY="274.0" text="" />
+      <FontAwesomeIcon fill="#00ff44" glyphName="CHECK" layoutX="835.0" layoutY="233.0" />
+      <FontAwesomeIcon fill="#00ff44" glyphName="CHECK" layoutX="96.0" layoutY="456.0" />
+      <FontAwesomeIcon fill="#00ff44" glyphName="CHECK" layoutX="161.0" layoutY="316.0" />
+   </children>
+</AnchorPane>

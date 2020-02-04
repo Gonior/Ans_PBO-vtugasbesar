@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.tubes.edu.controller;
 
 import com.tubes.edu.connection.TubesDB;
@@ -130,6 +126,7 @@ public class CreateViewController implements Initializable {
     private Path copy, files;
     private TubesValidasi valid = new TubesValidasi();
     private Anime anime;
+    private CheckBox[] cb = new CheckBox[20];
     private String genreAnime = "";
     @FXML
     private TextArea sinopsisTxt;
@@ -137,25 +134,93 @@ public class CreateViewController implements Initializable {
     private ImageView lihatGambar;
     @FXML
     private Label okehLbl;
+    @FXML
+    private CheckBox genre17cb;
+    @FXML
+    private CheckBox genre18cb;
+    @FXML
+    private CheckBox genre19cb;
+    @FXML
+    private CheckBox genre20cb;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            tube = new TubesEvent(TubesDB.getConnection());
-        } catch (SQLException ex) {
-            Logger.getLogger(CreateViewController.class.getName()).log(Level.SEVERE, null, ex);
+//        anime= new Anime();
+//        anime.setId(1);
+//        anime.setGenre("Romance, Supranatural, School, Drama");
+//        anime.setJudul("Kimi No Na Wa");
+//        anime.setJumlahEpisode(1);
+//        anime.setRating(9.12);
+//        anime.setSinopsis("Menceritakan seorang gadis bernama Mitsuha Miyamiz..");
+//        anime.setStatus("Completed");
+//        anime.setGambar("Kimi No Na Wa.jpg");
+//        anime.setDurasi("1 jam 46 menit");
+//        TubesSendingData.setAnime(anime);
+        if (TubesSendingData.getAnime() == null) {
+            try {
+                tube = new TubesEvent(TubesDB.getConnection());
+            } catch (SQLException ex) {
+                Logger.getLogger(CreateViewController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            anime = new Anime();
+            completedMenuItem.setOnAction(event1);
+            OnGoingMenuItem.setOnAction(event1);
+            resetField();
+            gambar = "no-image-available.jpg";
+        }else{
+            anime = TubesSendingData.getAnime();
+            loadAnime();
         }
-        anime = new Anime();
-        completedMenuItem.setOnAction(event1);
-        OnGoingMenuItem.setOnAction(event1);
-        resetField();
-        gambar = "no-image-available.jpg";
-
     }
-   
+    
+    private void loadAnime(){
+           final Image tumbnail = new Image(getClass().getResourceAsStream("/com/tubes/edu/asset/tumbnail/" + anime.getGambar()));
+           final String[] genre = anime.getGenre().split(",");
+           
+           judulTxt.setText(anime.getJudul());
+           sinopsisTxt.setText(anime.getSinopsis());
+           lihatGambar.setImage(tumbnail);
+           ratingTxt.setText(Double.toString(anime.getRating()));
+           jumlahEpTxt.setText(Integer.toString(anime.getJumlahEpisode()));
+           hasilMenuItem.setText(anime.getStatus());
+           cb[0] = genre1cb;
+           cb[1] = genre2cb;
+           cb[2] = genre3cb;
+           cb[3] = genre4cb;
+           cb[4] = genre5cb;
+           cb[5] = genre6cb;
+           cb[6] = genre7cb;
+           cb[7] = genre8cb;
+           cb[8] = genre9cb;
+           cb[9] = genre10cb;
+           cb[10] = genre11cb;
+           cb[11] = genre12cb;
+           cb[12] = genre13cb;
+           cb[13] = genre14cb;
+           cb[14] = genre15cb;
+           cb[15] = genre16cb;
+           cb[16] = genre17cb;
+           cb[17] = genre18cb;
+           cb[18] = genre19cb;
+           cb[19] = genre20cb;
+       
+           for(int i=0; i< genre.length;i++){
+               for(int j = 0;j < cb.length;j++) {
+                   if(genre[i].toUpperCase().trim().equals(cb[j].getText().toUpperCase())) {
+                       cb[j].setSelected(true);
+                   }
+               }
+           }
+           
+           
+ 
+           
+           
+        
+    }
 
     @FXML
     private void genrePilih(ActionEvent event) {
@@ -241,7 +306,7 @@ public class CreateViewController implements Initializable {
         if (valid.validasiAnime(anime)) {
 //            tube.insertAnime(anime);
 //            Anime newAnime = new Anime();
-//            if(tube.cariAnime(anime.getJudul())) {
+//            if (tube.cariAnime(anime.getJudul())) {
 //                newAnime = tube.getAnime();
 //            }
             TubesSendingData.setAnime(anime);

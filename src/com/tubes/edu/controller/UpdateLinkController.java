@@ -41,7 +41,7 @@ import javafx.stage.Stage;
  *
  * @author Firman Alfinas
  */
-public class AddLinkController implements Initializable {
+public class UpdateLinkController implements Initializable {
 
     @FXML
     protected VBox container;
@@ -83,7 +83,7 @@ public class AddLinkController implements Initializable {
         try {
             loadAnime();
         } catch (SQLException ex) {
-            Logger.getLogger(AddLinkController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UpdateLinkController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

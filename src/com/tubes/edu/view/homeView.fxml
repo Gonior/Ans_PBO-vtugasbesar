@@ -14,9 +14,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="644.0" prefWidth="1066.0" style="-fx-background-color: transparent;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.edu.controller.HomeViewController">
+<AnchorPane id="AnchorPane" prefHeight="644.0" prefWidth="1066.0" style="-fx-background-color: transparent;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.edu.controller.HomeViewController">
    <children>
-      <ScrollPane fx:id="homePanel" hbarPolicy="ALWAYS" layoutX="134.0" layoutY="67.0" prefHeight="577.0" prefWidth="932.0" vbarPolicy="ALWAYS" visible="false">
+      <ScrollPane fx:id="homePanel" hbarPolicy="ALWAYS" layoutX="134.0" layoutY="67.0" prefHeight="577.0" prefWidth="932.0" vbarPolicy="ALWAYS">
          <content>
             <VBox fx:id="barisKontainer" prefWidth="919.0" />
          </content>
@@ -60,14 +60,14 @@
                      </graphic></Button>
                </children>
             </HBox>
-            <HBox fx:id="aboutPanelBox1" alignment="CENTER" layoutX="10.0" layoutY="225.0" prefHeight="71.0" prefWidth="150.0">
+            <HBox fx:id="adminBox" alignment="CENTER" layoutX="10.0" layoutY="225.0" prefHeight="71.0" prefWidth="150.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#kembaliKeAboutUs" style="-fx-background-color: transparent;">
+                  <Button mnemonicParsing="false" onAction="#createView" style="-fx-background-color: transparent;">
                      <font>
                         <Font name="Segoe UI" size="20.0" />
                      </font>
                      <graphic>
-                        <FontAwesomeIcon fill="WHITE" glyphName="KEY" size="1.5em" />
+                        <FontAwesomeIcon fill="WHITE" glyphName="KEY" size="1.5em" text="" />
                      </graphic>
                   </Button>
                </children>
@@ -148,7 +148,7 @@
             </VBox>
          </children>
       </HBox>
-      <AnchorPane layoutX="136.0" layoutY="69.0" prefHeight="576.0" prefWidth="930.0">
+      <AnchorPane fx:id="aboutUsPanel" layoutX="136.0" layoutY="69.0" prefHeight="576.0" prefWidth="930.0" visible="false">
          <children>
             <Label layoutX="437.0" layoutY="44.0" text="Team">
                <font>
@@ -157,22 +157,22 @@
             </Label>
             <ImageView fitHeight="195.0" fitWidth="212.0" layoutX="26.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../Image/dedi.jpeg" />
+                  <Image url="@../asset/dedi.jpeg" />
                </image>
             </ImageView>
             <ImageView fitHeight="195.0" fitWidth="212.0" layoutX="251.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../Image/firmen.jpeg" />
+                  <Image url="@../asset/firmen.jpeg" />
                </image>
             </ImageView>
             <ImageView fitHeight="195.0" fitWidth="212.0" layoutX="475.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../Image/syifa.jpeg" />
+                  <Image url="@../asset/syifa.jpeg" />
                </image>
             </ImageView>
             <ImageView fitHeight="195.0" fitWidth="212.0" layoutX="698.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../Image/dandi.jpeg" />
+                  <Image url="@../asset/dandi.jpeg" />
                </image>
             </ImageView>
             <Label layoutX="83.0" layoutY="316.0" text="Dedi Cahya">

@@ -40,6 +40,7 @@ import com.tubes.edu.event.TubesEvent;
 import com.tubes.edu.model.Anime;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import java.util.List;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -83,6 +84,10 @@ public class HomeViewController implements Initializable {
     private static String[] judulList;
     TubesSendingData sendData = new TubesSendingData();
     private TubesEvent tubesEvent;
+    @FXML
+    private AnchorPane aboutUsPanel;
+    @FXML
+    private HBox adminBox;
     
     
     public HomeViewController() {
@@ -96,6 +101,11 @@ public class HomeViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         lblNamaUser.setText(TubesSendingData.getUser().getNama());
+        if (TubesSendingData.getUser().getNama().equals("admin")) {
+            adminBox.setVisible(true);
+        } else {
+            adminBox.setVisible(false);
+        }
         try {
             ambilDataAnime();
         } catch (SQLException ex) {
@@ -110,6 +120,8 @@ public class HomeViewController implements Initializable {
                         barisKontainer.getChildren().clear();
                         addContainer(anime);
                         panelNotFound.setVisible(false);
+                        showHome();
+//                        aboutUsPanel.setVisible(false);
                         homePanelBox.setStyle("-fx-background-color :  #37c5cd;");
                     } else {
                         homePanelBox.setStyle("-fx-background-color :  #37c5cd;");
@@ -164,6 +176,7 @@ public class HomeViewController implements Initializable {
         homePanel.setVisible(true);
         panelNotFound.setVisible(false);
         //tambahin aboutAspanel set false
+        aboutUsPanel.setVisible(false);
     }
     public void showAboutUS() {
         homePanelBox.setStyle("-fx-background-color : #37c5cd;");
@@ -171,11 +184,13 @@ public class HomeViewController implements Initializable {
         homePanel.setVisible(false);
         panelNotFound.setVisible(false);
         //tambahin aboutAspanel set true
+        aboutUsPanel.setVisible(true);
     }
     public void showNotFoundPanel() {
         homePanel.setVisible(false);
         panelNotFound.setVisible(true);
         //tambahin aboutAspanel
+        aboutUsPanel.setVisible(false);
     }
     public void animasiTxtField() {
         Timeline timeline = new Timeline();
@@ -321,5 +336,12 @@ public class HomeViewController implements Initializable {
     @FXML
     private void kembaliKeAboutUs(ActionEvent event) {
         showAboutUS();
+    }
+
+    @FXML
+    private void createView(ActionEvent event) throws IOException {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        tubesEvent.changeStage(stage, "CreateView");
+        
     }
 }

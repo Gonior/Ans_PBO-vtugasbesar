@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
@@ -15,41 +16,35 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="576.0" prefWidth="930.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.edu.view.CreateViewController">
+<AnchorPane id="AnchorPane" prefHeight="576.0" prefWidth="930.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes.edu.controller.CreateViewController">
    <children>
-      <Label layoutX="35.0" layoutY="76.0" text="Judul">
+      <Label layoutX="140.0" layoutY="50.0" text="Judul">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <TextField layoutX="90.0" layoutY="75.0" prefHeight="28.0" prefWidth="463.0" />
-      <Label layoutX="26.0" layoutY="126.0" text="Sinopsis">
+      <TextField fx:id="judulTxt" layoutX="140.0" layoutY="70.0" onKeyReleased="#judulTyped" prefHeight="28.0" prefWidth="463.0" promptText="Contoh : Kimi No Na Wa" style="-fx-border-radius: 10px; -fx-border-color: #a9a9a9; -fx-border-width: 2px; -fx-background-color: transparent;" />
+      <Label layoutX="141.0" layoutY="108.0" text="Sinopsis">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <TextArea layoutX="91.0" layoutY="120.0" prefHeight="76.0" prefWidth="463.0" />
-      <Label layoutX="32.0" layoutY="215.0" text="Rating">
+      <TextArea fx:id="sinopsisTxt" focusTraversable="false" layoutX="140.0" layoutY="128.0" onKeyReleased="#sinopsisTyped" prefHeight="76.0" prefWidth="463.0" promptText="kurang dari 255 karakter" style="-fx-background-color: transparent; -fx-border-color: #a9a9a9;" wrapText="true" />
+      <Label layoutX="142.0" layoutY="213.0" text="Rating">
          <font>
             <Font name="Segoe UI" size="14.0" />
          </font></Label>
-      <MenuButton layoutX="94.0" layoutY="296.0" mnemonicParsing="false" text="Pilih">
+      <MenuButton layoutX="355.0" layoutY="298.0" mnemonicParsing="false" onMouseClicked="#pilihStatus" popupSide="RIGHT" style="-fx-background-color: transparent;" text="Pilih">
         <items>
-          <MenuItem mnemonicParsing="false" text="Completed" />
-          <MenuItem mnemonicParsing="false" text="pilih" />
+          <MenuItem fx:id="completedMenuItem" mnemonicParsing="false" onAction="#pilihStatus" text="Completed" />
+            <MenuItem fx:id="OnGoingMenuItem" mnemonicParsing="false" onAction="#pilihStatus" text="On Going" />
         </items>
          <font>
             <Font size="14.0" />
          </font>
       </MenuButton>
-      <Button layoutX="830.0" layoutY="528.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="77.0" text="Selesai">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
-      <Button layoutX="418.0" layoutY="489.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" text="Cek" />
-      <Button layoutX="486.0" layoutY="489.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="53.0" text="Reset" />
-      <GridPane layoutX="95.0" layoutY="345.0" prefHeight="97.0" prefWidth="497.0">
+      <GridPane layoutX="149.0" layoutY="361.0" prefHeight="97.0" prefWidth="497.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="149.0" minWidth="5.0" prefWidth="86.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="149.0" minWidth="10.0" prefWidth="83.0" />
@@ -145,23 +140,23 @@
             </CheckBox>
          </children>
       </GridPane>
-      <Label layoutX="29.0" layoutY="347.0" text="Genre">
+      <Label layoutX="147.0" layoutY="338.0" text="Genre">
          <font>
             <Font name="Segoe UI" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="25.0" layoutY="14.0" text="Create New Anime">
+      <Label layoutX="137.0" layoutY="14.0" text="Create New Anime (Tahap 1)">
          <font>
             <Font name="Segoe UI Bold" size="18.0" />
          </font>
       </Label>
-      <Separator layoutX="26.0" layoutY="41.0" prefWidth="200.0" />
-      <ImageView fitHeight="117.0" fitWidth="112.0" layoutX="724.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
+      <Separator layoutX="136.0" layoutY="41.0" prefWidth="200.0" />
+      <ImageView fx:id="lihatGambar" fitHeight="214.0" fitWidth="150.0" layoutX="706.0" layoutY="48.0" pickOnBounds="true">
          <image>
-            <Image url="@../../../../Image/Pilih%20Gambar.png" />
+            <Image url="@../asset/tumbnail/Pilih%20Gambar.png" />
          </image>
       </ImageView>
-      <Button layoutX="723.0" layoutY="210.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="107.0" text="Pilih Gambar">
+      <Button fx:id="pilihGambar" layoutX="728.0" layoutY="267.0" mnemonicParsing="false" onAction="#pilihGambarClicked" prefHeight="36.0" prefWidth="107.0" style="-fx-background-color: #00cbff; -fx-border-radius: 20px; -fx-border-width: 2px; -fx-border-color: #00cbff; -fx-text-fill: #ffffff;" text="Pilih Gambar" textFill="#030303">
          <font>
             <Font size="14.0" />
          </font>
@@ -171,60 +166,107 @@
             <Font name="Segoe UI" size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="91.0" layoutY="213.0" prefHeight="28.0" prefWidth="463.0" />
-      <Label layoutX="30.0" layoutY="302.0" text="Status">
+      <TextField fx:id="ratingTxt" layoutX="142.0" layoutY="234.0" onKeyReleased="#ratingTyped" prefHeight="29.0" prefWidth="96.0" promptText="Contoh : 9.0" style="-fx-background-color: transparent; -fx-border-color: #a9a9a9; -fx-border-width: 2px; -fx-border-radius: 5px;" />
+      <Label layoutX="356.0" layoutY="279.0" text="Status">
          <font>
             <Font name="Segoe UI" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="20.0" layoutY="260.0" text="Jumlah Eps">
+      <Label layoutX="356.0" layoutY="214.0" text="Jumlah Episode">
          <font>
             <Font name="Segoe UI" size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="91.0" layoutY="255.0" prefHeight="28.0" prefWidth="463.0" />
-      <Label layoutX="568.0" layoutY="80.0" text="Label" textFill="RED">
+      <Label fx:id="infoJudulLbl" layoutX="182.0" layoutY="51.0" textFill="RED">
          <font>
-            <Font name="Segoe UI" size="14.0" />
+            <Font name="Segoe UI" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="569.0" layoutY="145.0" text="Label" textFill="RED">
+      <Label fx:id="infoSinopsisLbl" layoutX="200.0" layoutY="109.0" textFill="RED">
          <font>
-            <Font name="Segoe UI" size="14.0" />
+            <Font name="Segoe UI" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="569.0" layoutY="217.0" text="Label" textFill="RED">
+      <Label fx:id="infoRatingLbl" layoutX="186.0" layoutY="215.0" textFill="RED">
          <font>
-            <Font name="Segoe UI" size="14.0" />
+            <Font name="Segoe UI" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="569.0" layoutY="260.0" text="Label" textFill="RED">
+      <Label fx:id="infoJumlahEpLbl" layoutX="458.0" layoutY="217.0" textFill="RED">
          <font>
-            <Font name="Segoe UI" size="14.0" />
+            <Font name="Segoe UI" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="175.0" layoutY="302.0" text="Label" textFill="RED">
+      <Label fx:id="infoStatusLbl" layoutX="400.0" layoutY="281.0" textFill="RED">
          <font>
-            <Font name="Segoe UI" size="14.0" />
+            <Font name="Segoe UI" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="95.0" layoutY="454.0" text="Label" textFill="RED">
+      <Label fx:id="infoGenreLbl" layoutX="151.0" layoutY="462.0" textFill="RED">
          <font>
-            <Font name="Segoe UI" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="760.0" layoutY="251.0" text="Label" textFill="RED">
-         <font>
-            <Font name="Segoe UI" size="14.0" />
+            <Font name="Segoe UI" size="12.0" />
          </font>
       </Label>
       <Label layoutX="612.0" layoutY="88.0" />
-      <FontAwesomeIcon fill="#00ff44" glyphName="CHECK" layoutX="554.0" layoutY="93.0" />
-      <FontAwesomeIcon fill="#00ff44" glyphName="CHECK" layoutX="555.0" layoutY="159.0" />
-      <FontAwesomeIcon fill="#00ff44" glyphName="CHECK" layoutX="555.0" layoutY="231.0" />
-      <FontAwesomeIcon fill="#00ff44" glyphName="CHECK" layoutX="556.0" layoutY="274.0" text="" />
-      <FontAwesomeIcon fill="#00ff44" glyphName="CHECK" layoutX="835.0" layoutY="233.0" />
-      <FontAwesomeIcon fill="#00ff44" glyphName="CHECK" layoutX="96.0" layoutY="456.0" />
-      <FontAwesomeIcon fill="#00ff44" glyphName="CHECK" layoutX="161.0" layoutY="316.0" />
+      <FontAwesomeIcon fx:id="okJudul" fill="#4aed71" glyphName="CHECK" layoutX="605.0" layoutY="88.0" visible="false" />
+      <FontAwesomeIcon fx:id="okRating" fill="#00ff44" glyphName="CHECK" layoutX="249.0" layoutY="251.0" visible="false" />
+      <FontAwesomeIcon fx:id="okJumlahEp" fill="#00ff44" glyphName="CHECK" layoutX="455.0" layoutY="253.0" text="" visible="false" />
+      <FontAwesomeIcon fx:id="okGenre" fill="#00ff44" glyphName="CHECK" layoutX="196.0" layoutY="351.0" visible="false" />
+      <FontAwesomeIcon fx:id="okStatus" fill="#00ff44" glyphName="CHECK" layoutX="504.0" layoutY="317.0" visible="false" />
+      <Label layoutX="143.0" layoutY="276.0" text="Durasi">
+         <font>
+            <Font name="Segoe UI" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="infoDurasiLbl" layoutX="188.0" layoutY="279.0" textFill="RED">
+         <font>
+            <Font name="Segoe UI" size="12.0" />
+         </font>
+      </Label>
+      <FontAwesomeIcon fx:id="okDurasi" fill="#00ff44" glyphName="CHECK" layoutX="284.0" layoutY="314.0" text="" visible="false" />
+      <TextField fx:id="jumlahEpTxt" layoutX="355.0" layoutY="234.0" onKeyReleased="#jumlahEpTyped" prefHeight="29.0" prefWidth="92.0" promptText="Contoh : 12" style="-fx-background-color: transparent; -fx-border-color: #a9a9a9; -fx-border-width: 2px; -fx-border-radius: 5px;" />
+      <TextField fx:id="durasiTxt" layoutX="142.0" layoutY="295.0" onKeyReleased="#durasiTyped" prefHeight="29.0" prefWidth="96.0" promptText="Contoh : 24" style="-fx-background-color: transparent; -fx-border-color: #a9a9a9; -fx-border-width: 2px; -fx-border-radius: 5px;" />
+      <Label layoutX="242.0" layoutY="300.0" text="Menit" textFill="#c6bdbd">
+         <font>
+            <Font name="Segoe UI" size="14.0" />
+         </font>
+      </Label>
+      <FontAwesomeIcon fx:id="okSinopsis" fill="#4aed71" glyphName="CHECK" layoutX="605.0" layoutY="139.0" visible="false" />
+      <Button layoutX="288.0" layoutY="510.0" mnemonicParsing="false" onAction="#simpan" prefHeight="36.0" prefWidth="96.0" style="-fx-background-color: #00cbff; -fx-text-fill: #ffffff;" text="Tahap 2" textFill="#030303">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="408.0" layoutY="510.0" mnemonicParsing="false" onAction="#reset" prefHeight="36.0" prefWidth="92.0" style="-fx-background-color: #ad0852; -fx-text-fill: #ffffff;" text="Reset" textFill="#030303">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <VBox alignment="TOP_CENTER" layoutX="-3.0" prefHeight="576.0" prefWidth="126.0" style="-fx-background-color: #00cbff;">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="97.0" style="-fx-background-color: transparent;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIcon fill="WHITE" glyphName="ARROW_LEFT" size="2em" />
+               </graphic>
+            </Button>
+         </children>
+         <padding>
+            <Insets top="20.0" />
+         </padding>
+      </VBox>
+      <Separator layoutX="444.0" layoutY="252.0" prefHeight="3.0" prefWidth="420.0" rotate="90.0" />
+      <Label fx:id="hasilMenuItem" layoutX="425.0" layoutY="302.0" text=" ">
+         <font>
+            <Font name="Segoe UI" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="okehLbl" layoutX="328.0" layoutY="483.0" prefHeight="18.0" prefWidth="150.0" text="Periksa kembali Form!!" textFill="#f50000" visible="false">
+         <font>
+            <Font name="Segoe UI" size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -35,7 +35,7 @@ import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
 import com.tubes.edu.event.TubesValidasi;
 import com.tubes.edu.model.Anime;
-import javafx.scene.input.InputMethodEvent;
+
 
 /**
  * FXML Controller class
@@ -167,27 +167,27 @@ public class AdminViewController implements Initializable {
 
     @FXML
     private void judulTyped(KeyEvent event) {
-        valid.validasiJudulAnime(anime, judulTxt, judulLbl);
+
     }
 
     @FXML
     private void durasiTyped(KeyEvent event) {
-        valid.validasiDurasiAnime(anime, duraiTxt, durasiLbl);
+        
     }
 
     @FXML
     private void jumlahEpTyped(KeyEvent event) {
-        valid.validasiJumlahEpisode(anime, jumlahEpTxt, jumlahEpLbl);
+        
     }
 
     @FXML
     private void ratingTyped(KeyEvent event) {
-        valid.validasiRatingAnime(anime, ratingTxt, ratingLbl);
+        
     }
 
     @FXML
     private void sinopsisTyped(KeyEvent event) {
-        valid.validasiSinopsis(anime, sinopsisTxt, sinopsisLbl);
+        
     }
 
     @FXML
@@ -212,7 +212,7 @@ public class AdminViewController implements Initializable {
         if(onGoing.isSelected()) {
             statusStr = onGoing.getText();
         }
-        valid.validasiStatus(anime, statusStr, statusLbl);
+        
     }
                 
     @FXML
@@ -270,14 +270,46 @@ public class AdminViewController implements Initializable {
             genreStr += genre1cb.getText() +", ";
         }
         
-        valid.validasiGenre(anime, genreStr, genreLbl);
+        
         System.out.println(genreStr);
         
     }
 
-    private void ratingTyped(InputMethodEvent event) {
-        valid.validasiRatingAnime(anime, ratingTxt, ratingLbl);
+    
+    private void resetField() {
+        anime.setId(0);
+        anime.setJudul("");
+        anime.setDurasi("");
+        anime.setJumlahEpisode(0);
+        anime.setGenre("");
+        anime.setRating(0);
+        anime.setSinopsis("");
+        anime.setStatus("");
+        judulTxt.setText("");
+        jumlahEpTxt.setText("");
+        duraiTxt.setText("");
+        ratingTxt.setText("");
+        sinopsisTxt.setText("");
+        completed.setSelected(false);
+        onGoing.setSelected(false);
+        genre10cb.setSelected(false);
+        genre16cb.setSelected(false);
+        genre15cb.setSelected(false);
+        genre14cb.setSelected(false);
+        genre13cb.setSelected(false);
+        genre12cb.setSelected(false);
+        genre11cb.setSelected(false);
+        genre9cb.setSelected(false);
+        genre8cb.setSelected(false);
+        genre7cb.setSelected(false);
+        genre6cb.setSelected(false);
+        genre5cb.setSelected(false);
+        genre4cb.setSelected(false);
+        genre3cb.setSelected(false);
+        genre2cb.setSelected(false);
+        genre1cb.setSelected(false);
+        
     }
-
+    
 
 }

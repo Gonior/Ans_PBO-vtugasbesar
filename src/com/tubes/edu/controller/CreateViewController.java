@@ -44,7 +44,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 
-
 public class CreateViewController implements Initializable {
 
     @FXML
@@ -123,8 +122,7 @@ public class CreateViewController implements Initializable {
     private FontAwesomeIcon okSinopsis;
     @FXML
     private Label hasilMenuItem;
-    
-    
+
     private FileChooser fileChooser;
     private TubesEvent tube;
     private File file;
@@ -139,13 +137,14 @@ public class CreateViewController implements Initializable {
     private ImageView lihatGambar;
     @FXML
     private Label okehLbl;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            tube= new TubesEvent(TubesDB.getConnection());
+            tube = new TubesEvent(TubesDB.getConnection());
         } catch (SQLException ex) {
             Logger.getLogger(CreateViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -154,70 +153,72 @@ public class CreateViewController implements Initializable {
         OnGoingMenuItem.setOnAction(event1);
         resetField();
         gambar = "no-image-available.jpg";
+
     }
+   
 
     @FXML
     private void genrePilih(ActionEvent event) {
         String genreStr = "";
-        if(genre1cb.isSelected()) {
-            genreStr += genre1cb.getText() +", ";
+        if (genre1cb.isSelected()) {
+            genreStr += genre1cb.getText() + ", ";
         }
-        if(genre2cb.isSelected()) {
-            genreStr += genre2cb.getText() +", ";
+        if (genre2cb.isSelected()) {
+            genreStr += genre2cb.getText() + ", ";
         }
-        if(genre3cb.isSelected()) {
-            genreStr += genre3cb.getText() +", ";
+        if (genre3cb.isSelected()) {
+            genreStr += genre3cb.getText() + ", ";
         }
-        if(genre4cb.isSelected()) {
-            genreStr += genre4cb.getText() +", ";
+        if (genre4cb.isSelected()) {
+            genreStr += genre4cb.getText() + ", ";
         }
-        if(genre5cb.isSelected()) {
-            genreStr += genre5cb.getText() +", ";
+        if (genre5cb.isSelected()) {
+            genreStr += genre5cb.getText() + ", ";
         }
-        if(genre6cb.isSelected()) {
-            genreStr += genre6cb.getText() +", ";
+        if (genre6cb.isSelected()) {
+            genreStr += genre6cb.getText() + ", ";
         }
-        if(genre7cb.isSelected()) {
-            genreStr += genre7cb.getText() +", ";
+        if (genre7cb.isSelected()) {
+            genreStr += genre7cb.getText() + ", ";
         }
-        if(genre8cb.isSelected()) {
-            genreStr += genre8cb.getText() +", ";
+        if (genre8cb.isSelected()) {
+            genreStr += genre8cb.getText() + ", ";
         }
-        if(genre9cb.isSelected()) {
-            genreStr += genre9cb.getText() +", ";
+        if (genre9cb.isSelected()) {
+            genreStr += genre9cb.getText() + ", ";
         }
-        if(genre10cb.isSelected()) {
-            genreStr += genre10cb.getText() +", ";
+        if (genre10cb.isSelected()) {
+            genreStr += genre10cb.getText() + ", ";
         }
-        if(genre11cb.isSelected()) {
-            genreStr += genre11cb.getText() +", ";
+        if (genre11cb.isSelected()) {
+            genreStr += genre11cb.getText() + ", ";
         }
-        if(genre12cb.isSelected()) {
-            genreStr += genre12cb.getText() +", ";
+        if (genre12cb.isSelected()) {
+            genreStr += genre12cb.getText() + ", ";
         }
-        if(genre13cb.isSelected()) {
-            genreStr += genre13cb.getText() +", ";
+        if (genre13cb.isSelected()) {
+            genreStr += genre13cb.getText() + ", ";
         }
-        if(genre14cb.isSelected()) {
-            genreStr += genre14cb.getText() +", ";
+        if (genre14cb.isSelected()) {
+            genreStr += genre14cb.getText() + ", ";
         }
-        if(genre15cb.isSelected()) {
-            genreStr += genre15cb.getText() +", ";
+        if (genre15cb.isSelected()) {
+            genreStr += genre15cb.getText() + ", ";
         }
-        if(genre16cb.isSelected()) {
-            genreStr += genre16cb.getText() +", ";
+        if (genre16cb.isSelected()) {
+            genreStr += genre16cb.getText() + ", ";
         }
-        if(genre1cb.isSelected()) {
-            genreStr += genre1cb.getText() +", ";
+        if (genre1cb.isSelected()) {
+            genreStr += genre1cb.getText() + ", ";
         }
         genreAnime = genreStr;
-        valid.validasiGenre(anime, genreStr, infoGenreLbl ,okGenre);
+        valid.validasiGenre(anime, genreStr, infoGenreLbl, okGenre);
     }
 
     @FXML
     private void simpan(ActionEvent event) throws IOException, SQLException {
         valid.validasiStatus(anime, hasilMenuItem.getText(), infoStatusLbl, okStatus);
-        valid.validasiGenre(anime, genreAnime, infoGenreLbl ,okGenre);
+        valid.validasiGenre(anime, genreAnime, infoGenreLbl, okGenre);
         valid.validasiJudulAnime(anime, judulTxt, infoJudulLbl, okJudul);
         valid.validasiSinopsis(anime, sinopsisTxt, infoSinopsisLbl, okSinopsis);
         valid.validasiRatingAnime(anime, ratingTxt, infoRatingLbl, okRating);
@@ -233,47 +234,41 @@ public class CreateViewController implements Initializable {
                 };
                 Files.copy(files, copy, options);
             } catch (IOException ex) {
-                Logger.getLogger(AdminViewController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CreateViewController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         anime.setGambar(gambar);
         if (valid.validasiAnime(anime)) {
-            tube.insertAnime(anime);
-            Anime newAnime = new Anime();
-            if(tube.cariAnime(anime.getJudul())) {
-                newAnime = tube.getAnime();
-            }
-            TubesSendingData.setAnime(newAnime);
+//            tube.insertAnime(anime);
+//            Anime newAnime = new Anime();
+//            if(tube.cariAnime(anime.getJudul())) {
+//                newAnime = tube.getAnime();
+//            }
+            TubesSendingData.setAnime(anime);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             tube.changeStage(stage, "AddLink");
             okehLbl.setVisible(false);
         } else {
             okehLbl.setVisible(true);
         }
-        
-        
-        
-        
-        
+
     }
 
     @FXML
     private void reset(ActionEvent event) {
         resetField();
     }
-    
-    
-    
-     private void resetField() {
+
+    private void resetField() {
         fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*jpeg")
         );
         final Image tumbnail = new Image(getClass().getResourceAsStream("/com/tubes/edu/asset/tumbnail/Pilih Gambar.png"));
-            lihatGambar.setImage(tumbnail);
+        lihatGambar.setImage(tumbnail);
         anime.setId(0);
         anime.setJudul("");
-        anime.setDurasi("");
+        anime.setDurasi(0);
         anime.setJumlahEpisode(0);
         anime.setGenre("");
         anime.setRating(0);
@@ -314,7 +309,7 @@ public class CreateViewController implements Initializable {
         infoStatusLbl.setText("");
         infoGenreLbl.setText("");
         infoSinopsisLbl.setText("");
-        
+
     }
 
     @FXML
@@ -323,15 +318,15 @@ public class CreateViewController implements Initializable {
         if (file != null) {
             try {
                 BufferedImage bufferedImage = ImageIO.read(file);
-                Image image = SwingFXUtils.toFXImage(bufferedImage, null);                
+                Image image = SwingFXUtils.toFXImage(bufferedImage, null);
                 lihatGambar.setImage(image);
                 gambar = file.getName();
                 files = Paths.get(file.toURI());
             } catch (IOException ex) {
-                Logger.getLogger(AdminViewController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CreateViewController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
     }
 
     @FXML
@@ -353,13 +348,13 @@ public class CreateViewController implements Initializable {
     private void jumlahEpTyped(KeyEvent event) {
         valid.validasiJumlahEpisode(anime, jumlahEpTxt, infoJumlahEpLbl, okJumlahEp);
     }
-    
+
     EventHandler<ActionEvent> event1 = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
-            hasilMenuItem.setText(((MenuItem)event.getSource()).getText());
+            hasilMenuItem.setText(((MenuItem) event.getSource()).getText());
             valid.validasiStatus(anime, hasilMenuItem.getText(), infoStatusLbl, okStatus);
-            
+
         }
     };
 
@@ -376,13 +371,13 @@ public class CreateViewController implements Initializable {
     @FXML
     private void pilihStatus(MouseEvent event) {
         valid.validasiStatus(anime, hasilMenuItem.getText(), infoStatusLbl, okStatus);
-        
+
     }
 
     @FXML
     private void kembaliKehome(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            tube.changeStage(stage, "homeView");
-        
+        tube.changeStage(stage, "homeView");
+
     }
 }

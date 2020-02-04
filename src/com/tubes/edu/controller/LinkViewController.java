@@ -26,6 +26,7 @@ import javafx.stage.Stage;
 import com.tubes.edu.connection.TubesDB;
 import com.tubes.edu.data.TubesSendingData;
 import com.tubes.edu.event.TubesEvent;
+import com.tubes.edu.event.TubesValidasi;
 import com.tubes.edu.model.Anime;
 import com.tubes.edu.model.Link;
 import java.sql.SQLException;
@@ -58,9 +59,11 @@ public class LinkViewController implements Initializable {
     private ImageView lblImageView;
     private TubesEvent tubesEvent;
     private Anime anime;
+    private TubesValidasi tubesValidasi;
 
     public void loadAnime() {
         this.anime = TubesSendingData.getAnime();
+        tubesValidasi = new TubesValidasi();
     }
     
     @Override
@@ -150,7 +153,7 @@ public class LinkViewController implements Initializable {
         lblStatus.setText(anime.getStatus());
         lblGenre.setText(anime.getGenre());
         lblImageView.setImage(tumbnail);
-        lblDurasi.setText(anime.getDurasi());
+        lblDurasi.setText(tubesValidasi.durasiMaker(Integer.toString(anime.getDurasi())));
         lblJumlahEpisode.setText(Integer.toString(anime.getJumlahEpisode()));
         lblRating.setText(Double.toString(anime.getRating()));
         list.forEach((link) -> {

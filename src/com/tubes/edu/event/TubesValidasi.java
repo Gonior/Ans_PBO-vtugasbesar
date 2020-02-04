@@ -140,7 +140,7 @@ public class TubesValidasi {
         return hasil;
     }
 
-    private String durasiMaker(String durasi) {
+    public String durasiMaker(String durasi) {
         int angka = Integer.parseInt(durasi);
         String str = "";
         int jam = (int) angka / 60;
@@ -234,18 +234,18 @@ public class TubesValidasi {
         if (!txt.getText().trim().equals("")) {
             try {
                 int a = Integer.parseInt(txt.getText());
-                String durasi = durasiMaker(txt.getText().trim());
-                anime.setDurasi(durasi);
+//                String durasi = durasiMaker(txt.getText().trim());
+                anime.setDurasi(a);
                 captionLabel.setText("");
                 ok.setVisible(true);
             } catch (NumberFormatException e) {
                 captionLabel.setText("Masukan tipe data integer");
-                anime.setDurasi("");
+                anime.setDurasi(0);
                 ok.setVisible(false);
             }
         } else {
             captionLabel.setText("Masukan durasi anime");
-            anime.setDurasi("");
+            anime.setDurasi(0);
             ok.setVisible(false);
         }
 
@@ -330,7 +330,7 @@ public class TubesValidasi {
 
     public boolean validasiAnime(Anime anime) {
         boolean hasil = false;
-        hasil = !anime.getJudul().equals("") && !anime.getDurasi().equals("") && !anime.getGenre().equals("") && anime.getJumlahEpisode() != 0 && anime.getRating() != 0.0 && anime.getRating() <= 10 && !anime.getSinopsis().equals("") && anime.getSinopsis().length() <= 255 && !anime.getStatus().equals("");
+        hasil = !anime.getJudul().equals("") && anime.getDurasi() !=0 && !anime.getGenre().equals("") && anime.getJumlahEpisode() != 0 && anime.getRating() != 0.0 && !anime.getSinopsis().equals("") && !anime.getStatus().equals("");
         return hasil;
     }
 

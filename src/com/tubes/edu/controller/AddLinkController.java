@@ -187,6 +187,7 @@ public class AddLinkController implements Initializable {
         }else {
             System.out.println("Yahh");
         }
+        
         for (Link l : animeLinks) {
             tube.insertLink(l);
         }

@@ -118,7 +118,7 @@ public class TubesEvent implements TubesInterface{
                 anim.setRating(rs.getDouble("rating_anime"));
                 anim.setGambar(rs.getString("gambar_anime"));
                 anim.setSinopsis(rs.getString("sinopsis_anime"));
-                anim.setDurasi(rs.getString("durasi_anime"));
+                anim.setDurasi(rs.getInt("durasi_anime"));
                 anim.setStatus(rs.getString("status"));
                 anim.setGenre(rs.getString("genre_anime"));
                 list.add(anim);
@@ -178,7 +178,7 @@ public class TubesEvent implements TubesInterface{
                 this.anime.setRating(rs.getDouble("rating_anime"));
                 this.anime.setGambar(rs.getString("gambar_anime"));
                 this.anime.setSinopsis(rs.getString("sinopsis_anime"));
-                this.anime.setDurasi(rs.getString("durasi_anime"));
+                this.anime.setDurasi(rs.getInt("durasi_anime"));
                 this.anime.setStatus(rs.getString("status"));
                 this.anime.setGenre(rs.getString("genre_anime"));
                 hasil = true;
@@ -302,7 +302,7 @@ public class TubesEvent implements TubesInterface{
             st.setDouble(4, anime.getRating());
             st.setString(5, anime.getGambar());
             st.setString(6, anime.getSinopsis());
-            st.setString(7, anime.getDurasi());
+            st.setInt(7, anime.getDurasi());
             st.setString(8, anime.getStatus());
             st.setString(9, anime.getGenre());
             st.executeUpdate();

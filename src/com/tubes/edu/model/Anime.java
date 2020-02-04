@@ -6,8 +6,8 @@
 package com.tubes.edu.model;
 
 public class Anime {
-    private int id,jumlahEpisode;
-    private String judul,sinopsis,gambar,durasi,status,genre;
+    private int id,jumlahEpisode,durasi;
+    private String judul,sinopsis,gambar,status,genre;
     private double rating;
 
     public int getId() {
@@ -50,11 +50,11 @@ public class Anime {
         this.gambar = gambar;
     }
 
-    public String getDurasi() {
+    public int getDurasi() {
         return durasi;
     }
 
-    public void setDurasi(String durasi) {
+    public void setDurasi(int durasi) {
         this.durasi = durasi;
     }
 

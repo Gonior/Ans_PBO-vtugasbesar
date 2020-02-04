@@ -5,6 +5,7 @@
  */
 package com.tubes.edu.controller;
 
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 import com.tubes.edu.connection.TubesDB;
 import com.tubes.edu.data.TubesSendingData;
 import com.tubes.edu.event.TubesEvent;
@@ -15,6 +16,7 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -32,6 +34,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import jdk.nashorn.internal.objects.NativeArray;
 
 /**
  * FXML Controller class
@@ -82,11 +85,11 @@ public class AddLinkController implements Initializable {
             Logger.getLogger(AddLinkController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        
     }
     public void loadAnime() throws SQLException {
         tube= new TubesEvent(TubesDB.getConnection());
         this.anime = TubesSendingData.getAnime();
+        animeLinks = new ArrayList<>();
         texts = new TextField[anime.getJumlahEpisode()];
         lbls = new Label[anime.getJumlahEpisode()];
         ics = new FontAwesomeIcon[anime.getJumlahEpisode()];
@@ -169,21 +172,23 @@ public class AddLinkController implements Initializable {
     
 
     @FXML
-    private void simpan(ActionEvent event) {
+    private void simpan(ActionEvent event) throws SQLException {
         for (int index = 0; index < anime.getJumlahEpisode(); index++) {
             validasi.validasiLink(texts[index], lbls[index], ics[index]);
         }
-        if (validasi.validasiUrl(anime, texts)) {
-            System.out.println("Mantul");
+        if (validasi.validasiUrl(anime, texts)) {    
             for (int i = 0; i < anime.getJumlahEpisode(); i++) {
                 link = new Link();
-                link.setEpisode(i);
+                link.setEpisode(i+1);
                 link.setIdAnime(anime.getId());
                 link.setUrlStreaming(texts[i].getText().trim());
                 animeLinks.add(link);
             }
-        } else {
+        }else {
             System.out.println("Yahh");
+        }
+        for (Link l : animeLinks) {
+            tube.insertLink(l);
         }
     }
 

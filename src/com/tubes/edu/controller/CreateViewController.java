@@ -215,7 +215,7 @@ public class CreateViewController implements Initializable {
     }
 
     @FXML
-    private void simpan(ActionEvent event) throws IOException {
+    private void simpan(ActionEvent event) throws IOException, SQLException {
         valid.validasiStatus(anime, hasilMenuItem.getText(), infoStatusLbl, okStatus);
         valid.validasiGenre(anime, genreAnime, infoGenreLbl ,okGenre);
         valid.validasiJudulAnime(anime, judulTxt, infoJudulLbl, okJudul);
@@ -238,7 +238,12 @@ public class CreateViewController implements Initializable {
         }
         anime.setGambar(gambar);
         if (valid.validasiAnime(anime)) {
-            TubesSendingData.setAnime(anime);
+            tube.insertAnime(anime);
+            Anime newAnime = new Anime();
+            if(tube.cariAnime(anime.getJudul())) {
+                newAnime = tube.getAnime();
+            }
+            TubesSendingData.setAnime(newAnime);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             tube.changeStage(stage, "AddLink");
             okehLbl.setVisible(false);

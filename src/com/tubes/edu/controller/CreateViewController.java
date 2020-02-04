@@ -6,6 +6,7 @@
 package com.tubes.edu.controller;
 
 import com.tubes.edu.connection.TubesDB;
+import com.tubes.edu.data.TubesSendingData;
 import com.tubes.edu.event.TubesEvent;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import javafx.scene.control.MenuItem;
@@ -220,7 +221,7 @@ public class CreateViewController implements Initializable {
         valid.validasiJudulAnime(anime, judulTxt, infoJudulLbl, okJudul);
         valid.validasiSinopsis(anime, sinopsisTxt, infoSinopsisLbl, okSinopsis);
         valid.validasiRatingAnime(anime, ratingTxt, infoRatingLbl, okRating);
-        valid.validasiJudulAnime(anime, jumlahEpTxt, infoJumlahEpLbl, okJumlahEp);
+        valid.validasiJumlahEpisode(anime, jumlahEpTxt, infoJumlahEpLbl, okJumlahEp);
         valid.validasiDurasiAnime(anime, durasiTxt, infoDurasiLbl, okDurasi);
         if (!gambar.equals("no-image-available.jpg")) {
             try {
@@ -235,15 +236,18 @@ public class CreateViewController implements Initializable {
                 Logger.getLogger(AdminViewController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        anime.setGambar(gambar);
         if (valid.validasiAnime(anime)) {
+            TubesSendingData.setAnime(anime);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            tube.changeStage(stage, "Link");
+            tube.changeStage(stage, "AddLink");
             okehLbl.setVisible(false);
         } else {
             okehLbl.setVisible(true);
         }
         
-        anime.setGambar(gambar);
+        
+        
         
         
     }
@@ -367,6 +371,13 @@ public class CreateViewController implements Initializable {
     @FXML
     private void pilihStatus(MouseEvent event) {
         valid.validasiStatus(anime, hasilMenuItem.getText(), infoStatusLbl, okStatus);
+        
+    }
+
+    @FXML
+    private void kembaliKehome(ActionEvent event) throws IOException {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            tube.changeStage(stage, "homeView");
         
     }
 }

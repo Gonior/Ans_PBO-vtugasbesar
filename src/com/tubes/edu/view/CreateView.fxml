@@ -244,7 +244,7 @@
       </Button>
       <VBox alignment="TOP_CENTER" layoutX="-3.0" prefHeight="576.0" prefWidth="126.0" style="-fx-background-color: #00cbff;">
          <children>
-            <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="97.0" style="-fx-background-color: transparent;">
+            <Button mnemonicParsing="false" onAction="#kembaliKehome" prefHeight="28.0" prefWidth="97.0" style="-fx-background-color: transparent;">
                <font>
                   <Font size="14.0" />
                </font>

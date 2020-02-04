@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import java.util.Arrays;
 
 public class TubesValidasi {
 
@@ -154,16 +155,16 @@ public class TubesValidasi {
         return str;
     }
 
-    private void genreMaker(String str) {
+    private String genreMaker(String str) {
         String temp = "";
-        int panjangStr = str.length() - 1;
+        int panjangStr = str.length() - 2;
         for (int i = 0; i < panjangStr; i++) {
             temp += str.charAt(i);
         }
-        str = temp;
+        return temp;
     }
 
-    public void validasiJudulAnime(Anime anime, TextField txt, Label captionLabel,FontAwesomeIcon ok) {
+    public void validasiJudulAnime(Anime anime, TextField txt, Label captionLabel, FontAwesomeIcon ok) {
         if (txt.getText().trim().equals("")) {
             captionLabel.setText("Judul harus diisi");
             anime.setJudul("");
@@ -176,7 +177,7 @@ public class TubesValidasi {
         }
     }
 
-    public void validasiJumlahEpisode(Anime anime, TextField txt, Label captionLabel,FontAwesomeIcon ok) {
+    public void validasiJumlahEpisode(Anime anime, TextField txt, Label captionLabel, FontAwesomeIcon ok) {
 
         if (!txt.getText().trim().equals("")) {
             try {
@@ -212,11 +213,11 @@ public class TubesValidasi {
                         ok.setVisible(true);
                     }
                 } catch (NumberFormatException e) {
-                        captionLabel.setText("Skala 1 - 10");
-                        anime.setRating(0.0);
-                        ok.setVisible(false);
+                    captionLabel.setText("Skala 1 - 10");
+                    anime.setRating(0.0);
+                    ok.setVisible(false);
                 }
-                
+
             } catch (NumberFormatException e) {
                 captionLabel.setText("Masukan tipe data double");
                 anime.setRating(0.0);
@@ -229,7 +230,7 @@ public class TubesValidasi {
         }
     }
 
-    public void validasiDurasiAnime(Anime anime, TextField txt, Label captionLabel,FontAwesomeIcon ok) {
+    public void validasiDurasiAnime(Anime anime, TextField txt, Label captionLabel, FontAwesomeIcon ok) {
         if (!txt.getText().trim().equals("")) {
             try {
                 int a = Integer.parseInt(txt.getText());
@@ -250,7 +251,7 @@ public class TubesValidasi {
 
     }
 
-    public void validasiSinopsis(Anime anime, TextArea txt, Label captionLabel,FontAwesomeIcon ok) {
+    public void validasiSinopsis(Anime anime, TextArea txt, Label captionLabel, FontAwesomeIcon ok) {
         if (!txt.getText().trim().equals("")) {
             if (txt.getText().length() >= 255) {
                 captionLabel.setText("Tidak lebih dari 255 karakter");
@@ -268,20 +269,30 @@ public class TubesValidasi {
         }
     }
 
-    public void validasiGenre(Anime anime, String genre, Label captionLabel,FontAwesomeIcon ok) {
+    public void validasiGenre(Anime anime, String genre, Label captionLabel, FontAwesomeIcon ok) {
         if (genre.equals("")) {
             captionLabel.setText("Setidaknya centang salah satu genre");
             anime.setGenre("");
             ok.setVisible(false);
         } else {
             captionLabel.setText("");
-            genreMaker(genre);
-            anime.setGenre(genre);
+            String gnr = genreMaker(genre);
+            anime.setGenre(gnr);
             ok.setVisible(true);
         }
     }
 
-    public void validasiStatus(Anime anime, String status, Label captionLabel,FontAwesomeIcon ok) {
+    public void validasiLink(TextField txt, Label info, FontAwesomeIcon ok) {
+        if (txt.getText().trim().equals("")) {
+            info.setText("Masukan URL");
+            ok.setVisible(false);
+        } else {
+            info.setText("");
+            ok.setVisible(true);
+        }
+    }
+
+    public void validasiStatus(Anime anime, String status, Label captionLabel, FontAwesomeIcon ok) {
         if (status.trim().equals("")) {
             captionLabel.setText("Setidaknya pilih salah satu status");
             anime.setStatus("");
@@ -294,9 +305,32 @@ public class TubesValidasi {
         }
     }
 
+    public boolean validasiUrl(Anime anime, TextField[] tx) {
+        boolean hasil = false;
+        int flag = 0;
+        boolean[] hasilarr = new boolean[anime.getJumlahEpisode()];
+        int boolean_to_int[] = new int[anime.getJumlahEpisode()];
+        for (int i = 0; i < anime.getJumlahEpisode(); i++) {
+            hasilarr[i] = !tx[i].getText().trim().equals("");
+        }
+        for (int i = 0; i < anime.getJumlahEpisode(); i++) {
+            if (hasilarr[i]) {
+                boolean_to_int[i] = 1;
+            } else {
+                boolean_to_int[i] = 0;
+            }
+        }
+        for (int i = 0; i < anime.getJumlahEpisode(); i++) {
+            flag += boolean_to_int[i];
+        }
+        hasil = flag == anime.getJumlahEpisode();
+        
+        return hasil;
+    }
+
     public boolean validasiAnime(Anime anime) {
         boolean hasil = false;
-        hasil = !anime.getJudul().equals("") && !anime.getDurasi().equals("") && !anime.getGenre().equals("") && anime.getJumlahEpisode() != 0 && anime.getRating() != 0.0 && !anime.getSinopsis().equals("") && !anime.getStatus().equals("");
+        hasil = !anime.getJudul().equals("") && !anime.getDurasi().equals("") && !anime.getGenre().equals("") && anime.getJumlahEpisode() != 0 && anime.getRating() != 0.0 && anime.getRating() <= 10 && !anime.getSinopsis().equals("") && anime.getSinopsis().length() <= 255 && !anime.getStatus().equals("");
         return hasil;
     }
 

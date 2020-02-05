@@ -39,7 +39,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 
-public class CreateViewController implements Initializable {
+public class UpdateAnimeController implements Initializable {
 
     @FXML
     private TextField judulTxt;
@@ -152,18 +152,56 @@ public class CreateViewController implements Initializable {
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*jpeg")
         );
-        final Image tumbnail = new Image(getClass().getResourceAsStream("/com/tubes/edu/asset/tumbnail/Pilih Gambar.png"));
-        lihatGambar.setImage(tumbnail);
-        gambar = "no-image-available.jpg";
         try {
             tube = new TubesEvent(TubesDB.getConnection());
         } catch (SQLException ex) {
-            Logger.getLogger(CreateViewController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UpdateAnimeController.class.getName()).log(Level.SEVERE, null, ex);
         }
-            anime = new Anime();
-            completedMenuItem.setOnAction(event1);
-            OnGoingMenuItem.setOnAction(event1);
-            resetField();
+        anime = TubesSendingData.getAnime();
+        loadAnime();
+
+    }
+
+    private void loadAnime() {
+        final Image tumbnail = new Image(getClass().getResourceAsStream("/com/tubes/edu/asset/tumbnail/" + anime.getGambar()));
+        final String[] genre = anime.getGenre().split(",");
+
+        judulTxt.setText(anime.getJudul());
+        sinopsisTxt.setText(anime.getSinopsis());
+        lihatGambar.setImage(tumbnail);
+        ratingTxt.setText(Double.toString(anime.getRating()));
+        jumlahEpTxt.setText(Integer.toString(anime.getJumlahEpisode()));
+        hasilMenuItem.setText(anime.getStatus());
+        durasiTxt.setText(Integer.toString(anime.getDurasi()));
+        cb[0] = genre1cb;
+        cb[1] = genre2cb;
+        cb[2] = genre3cb;
+        cb[3] = genre4cb;
+        cb[4] = genre5cb;
+        cb[5] = genre6cb;
+        cb[6] = genre7cb;
+        cb[7] = genre8cb;
+        cb[8] = genre9cb;
+        cb[9] = genre10cb;
+        cb[10] = genre11cb;
+        cb[11] = genre12cb;
+        cb[12] = genre13cb;
+        cb[13] = genre14cb;
+        cb[14] = genre15cb;
+        cb[15] = genre16cb;
+        cb[16] = genre17cb;
+        cb[17] = genre18cb;
+        cb[18] = genre19cb;
+        cb[19] = genre20cb;
+
+        for (String genre1 : genre) {
+            for (CheckBox cb1 : cb) {
+                if (genre1.toUpperCase().trim().equals(cb1.getText().toUpperCase())) {
+                    cb1.setSelected(true);
+                }
+            }
+        }
+
     }
 
     @FXML
@@ -234,98 +272,6 @@ public class CreateViewController implements Initializable {
     }
 
     @FXML
-    private void simpan(ActionEvent event) throws IOException, SQLException {
-        valid.validasiStatus(anime, hasilMenuItem.getText(), infoStatusLbl, okStatus);
-        valid.validasiGenre(anime, genreAnime, infoGenreLbl, okGenre);
-        valid.validasiJudulAnime(anime, judulTxt, infoJudulLbl, okJudul);
-        valid.validasiSinopsis(anime, sinopsisTxt, infoSinopsisLbl, okSinopsis);
-        valid.validasiRatingAnime(anime, ratingTxt, infoRatingLbl, okRating);
-        valid.validasiJumlahEpisode(anime, jumlahEpTxt, infoJumlahEpLbl, okJumlahEp);
-        valid.validasiDurasiAnime(anime, durasiTxt, infoDurasiLbl, okDurasi);
-        if (!gambar.equals("no-image-available.jpg")) {
-            try {
-                File dir = new File(System.getProperty("user.dir"));
-                copy = (Path) Paths.get(dir + "/src/com/tubes/edu/asset/tumbnail/" + gambar);
-                CopyOption[] options = new CopyOption[]{
-                    StandardCopyOption.REPLACE_EXISTING,
-                    StandardCopyOption.COPY_ATTRIBUTES
-                };
-                Files.copy(files, copy, options);
-            } catch (IOException ex) {
-                Logger.getLogger(CreateViewController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        anime.setGambar(gambar);
-        if (valid.validasiAnime(anime)) {
-
-            TubesSendingData.setAnime(anime);
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            tube.changeStage(stage, "AddLink");
-            okehLbl.setVisible(false);
-        } else {
-            okehLbl.setVisible(true);
-        }
-
-    }
-
-    @FXML
-    private void reset(ActionEvent event) {
-        resetField();
-    }
-
-    private void resetField() {
-
-        anime.setId(0);
-        anime.setJudul("");
-        anime.setDurasi(0);
-        anime.setJumlahEpisode(0);
-        anime.setGenre("");
-        anime.setRating(0);
-        anime.setSinopsis("");
-        anime.setStatus("");
-        judulTxt.setText("");
-        jumlahEpTxt.setText("");
-        durasiTxt.setText("");
-        ratingTxt.setText("");
-        sinopsisTxt.setText("");
-        genre10cb.setSelected(false);
-        genre17cb.setSelected(false);
-        genre18cb.setSelected(false);
-        genre19cb.setSelected(false);
-        genre20cb.setSelected(false);
-        genre16cb.setSelected(false);
-        genre15cb.setSelected(false);
-        genre14cb.setSelected(false);
-        genre13cb.setSelected(false);
-        genre12cb.setSelected(false);
-        genre11cb.setSelected(false);
-        genre9cb.setSelected(false);
-        genre8cb.setSelected(false);
-        genre7cb.setSelected(false);
-        genre6cb.setSelected(false);
-        genre5cb.setSelected(false);
-        genre4cb.setSelected(false);
-        genre3cb.setSelected(false);
-        genre2cb.setSelected(false);
-        genre1cb.setSelected(false);
-        okDurasi.setVisible(false);
-        okGenre.setVisible(false);
-        okJudul.setVisible(false);
-        okJumlahEp.setVisible(false);
-        okRating.setVisible(false);
-        okStatus.setVisible(false);
-        hasilMenuItem.setText("");
-        infoDurasiLbl.setText("");
-        infoJudulLbl.setText("");
-        infoJumlahEpLbl.setText("");
-        infoRatingLbl.setText("");
-        infoStatusLbl.setText("");
-        infoGenreLbl.setText("");
-        infoSinopsisLbl.setText("");
-
-    }
-
-    @FXML
     private void pilihGambarClicked(ActionEvent event) {
         file = fileChooser.showOpenDialog(null);
         if (file != null) {
@@ -336,7 +282,7 @@ public class CreateViewController implements Initializable {
                 gambar = file.getName();
                 files = Paths.get(file.toURI());
             } catch (IOException ex) {
-                Logger.getLogger(CreateViewController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(UpdateAnimeController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
@@ -392,5 +338,36 @@ public class CreateViewController implements Initializable {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         tube.changeStage(stage, "homeView");
 
+    }
+
+    @FXML
+    private void updateAnime(ActionEvent event) {
+        valid.validasiStatus(anime, hasilMenuItem.getText(), infoStatusLbl, okStatus);
+        valid.validasiGenre(anime, genreAnime, infoGenreLbl, okGenre);
+        valid.validasiJudulAnime(anime, judulTxt, infoJudulLbl, okJudul);
+        valid.validasiSinopsis(anime, sinopsisTxt, infoSinopsisLbl, okSinopsis);
+        valid.validasiRatingAnime(anime, ratingTxt, infoRatingLbl, okRating);
+        valid.validasiJumlahEpisode(anime, jumlahEpTxt, infoJumlahEpLbl, okJumlahEp);
+        valid.validasiDurasiAnime(anime, durasiTxt, infoDurasiLbl, okDurasi);
+        if (!gambar.equals("no-image-available.jpg")) {
+            try {
+                File dir = new File(System.getProperty("user.dir"));
+                copy = (Path) Paths.get(dir + "/src/com/tubes/edu/asset/tumbnail/" + gambar);
+                CopyOption[] options = new CopyOption[]{
+                    StandardCopyOption.REPLACE_EXISTING,
+                    StandardCopyOption.COPY_ATTRIBUTES
+                };
+                Files.copy(files, copy, options);
+            } catch (IOException ex) {
+                Logger.getLogger(UpdateAnimeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        anime.setGambar(gambar);
+        if (valid.validasiAnime(anime)) {
+            //updateSQl
+            okehLbl.setVisible(false);
+        } else {
+            okehLbl.setVisible(true);
+        }
     }
 }

@@ -168,6 +168,7 @@ public class UpdateAnimeController implements Initializable {
 
         judulTxt.setText(anime.getJudul());
         sinopsisTxt.setText(anime.getSinopsis());
+        gambar = anime.getGambar();
         lihatGambar.setImage(tumbnail);
         ratingTxt.setText(Double.toString(anime.getRating()));
         jumlahEpTxt.setText(Integer.toString(anime.getJumlahEpisode()));
@@ -336,12 +337,12 @@ public class UpdateAnimeController implements Initializable {
     @FXML
     private void kembaliKehome(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        tube.changeStage(stage, "homeView");
+        tube.changeStage(stage, "AdminView");
 
     }
 
     @FXML
-    private void updateAnime(ActionEvent event) {
+    private void updateAnime(ActionEvent event) throws SQLException {
         valid.validasiStatus(anime, hasilMenuItem.getText(), infoStatusLbl, okStatus);
         valid.validasiGenre(anime, genreAnime, infoGenreLbl, okGenre);
         valid.validasiJudulAnime(anime, judulTxt, infoJudulLbl, okJudul);
@@ -349,7 +350,7 @@ public class UpdateAnimeController implements Initializable {
         valid.validasiRatingAnime(anime, ratingTxt, infoRatingLbl, okRating);
         valid.validasiJumlahEpisode(anime, jumlahEpTxt, infoJumlahEpLbl, okJumlahEp);
         valid.validasiDurasiAnime(anime, durasiTxt, infoDurasiLbl, okDurasi);
-        if (!gambar.equals("no-image-available.jpg")) {
+        if (!gambar.equals(anime.getGambar())) {
             try {
                 File dir = new File(System.getProperty("user.dir"));
                 copy = (Path) Paths.get(dir + "/src/com/tubes/edu/asset/tumbnail/" + gambar);
@@ -364,7 +365,7 @@ public class UpdateAnimeController implements Initializable {
         }
         anime.setGambar(gambar);
         if (valid.validasiAnime(anime)) {
-            //updateSQl
+            tube.updateAnime(anime);
             okehLbl.setVisible(false);
         } else {
             okehLbl.setVisible(true);

@@ -16,7 +16,6 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -91,13 +90,19 @@ public class UpdateLinkController implements Initializable {
     public void loadAnime() throws SQLException {
         tube = new TubesEvent(TubesDB.getConnection());
         this.anime = TubesSendingData.getAnime();
-        animeLinks = new ArrayList<>();
+        animeLinks = tube.getAllLink(anime);
         texts = new TextField[anime.getJumlahEpisode()];
         lbls = new Label[anime.getJumlahEpisode()];
         ics = new FontAwesomeIcon[anime.getJumlahEpisode()];
         jumlahEpLbl.setText(": " + anime.getJumlahEpisode() + " Episode");
-        makeVBox(anime.getJumlahEpisode());
         judulLbl.setText(": " + anime.getJudul());
+        makeVBox(anime.getJumlahEpisode());
+        animeLinks.forEach((Link l) -> {
+            System.out.println(l.getEpisode());
+            
+            texts[l.getEpisode()-1].setText(l.getUrlStreaming());
+;        });
+        
 
     }
 
@@ -191,11 +196,12 @@ public class UpdateLinkController implements Initializable {
                 animeLinks.add(link);
             }
             for (Link l : animeLinks) {
-                tube.insertLink(l);
+                tube.updateLink(l);
+System.out.println("Data berhasil diupdate");
             }
             AlertHelper.showAlert(Alert.AlertType.INFORMATION, null, "SUCCESS", "Data berhasil disimpan!");
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            tube.changeStage(stage, "homeView");
+            tube.changeStage(stage, "AdminView");
         } else {
             AlertHelper.showAlert(Alert.AlertType.ERROR, null, "Form Error!", "Opps.. Silahkan periksa kembali form url");
         }
@@ -204,9 +210,8 @@ public class UpdateLinkController implements Initializable {
 
     @FXML
     private void kembaliKeTahap1(ActionEvent event) throws IOException {
-        TubesSendingData.setAnime(anime);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        tube.changeStage(stage, "CreateView");
+        tube.changeStage(stage, "AdminView");
 
     }
 

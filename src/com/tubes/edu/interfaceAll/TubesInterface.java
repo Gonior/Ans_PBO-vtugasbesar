@@ -18,6 +18,8 @@ public interface TubesInterface {
     public void insertUSer(User user) throws SQLException;
     public void insertAnime(Anime anime) throws SQLException;
     public void insertLink(Link link) throws SQLException;
+    public void updateAnime(Anime anime) throws SQLException;
+    public void updateLink(Link link) throws SQLException;
     public boolean cariUser(String username) throws SQLException;
     public boolean login(User user) throws SQLException;  
     public boolean cariAnime(String judulAnime) throws SQLException;
@@ -28,4 +30,5 @@ public interface TubesInterface {
     public User getUSer();
     public Anime getAnime();
     public Link getLink();
+    public void deleteAnime(Anime anime) throws SQLException;
 }

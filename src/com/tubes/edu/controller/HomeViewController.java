@@ -91,6 +91,7 @@ public class HomeViewController implements Initializable {
     
     
     public HomeViewController() {
+        TubesSendingData.setAnime(null);
         try {
             tubesEvent = new TubesEvent(TubesDB.getConnection());
         } catch (SQLException ex) {
@@ -121,7 +122,6 @@ public class HomeViewController implements Initializable {
                         addContainer(anime);
                         panelNotFound.setVisible(false);
                         showHome();
-//                        aboutUsPanel.setVisible(false);
                         homePanelBox.setStyle("-fx-background-color :  #37c5cd;");
                     } else {
                         homePanelBox.setStyle("-fx-background-color :  #37c5cd;");
@@ -341,7 +341,7 @@ public class HomeViewController implements Initializable {
     @FXML
     private void createView(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        tubesEvent.changeStage(stage, "CreateView");
+        tubesEvent.changeStage(stage, "AdminView");
         
     }
 }

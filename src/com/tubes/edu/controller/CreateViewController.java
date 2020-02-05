@@ -148,22 +148,70 @@ public class CreateViewController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        completedMenuItem.setOnAction(event1);
+        OnGoingMenuItem.setOnAction(event1);
         fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*jpeg")
         );
-        final Image tumbnail = new Image(getClass().getResourceAsStream("/com/tubes/edu/asset/tumbnail/Pilih Gambar.png"));
-        lihatGambar.setImage(tumbnail);
-        gambar = "no-image-available.jpg";
+
         try {
             tube = new TubesEvent(TubesDB.getConnection());
         } catch (SQLException ex) {
             Logger.getLogger(CreateViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        if (TubesSendingData.getAnime() == null) {
             anime = new Anime();
-            completedMenuItem.setOnAction(event1);
-            OnGoingMenuItem.setOnAction(event1);
             resetField();
+            final Image tumbnail = new Image(getClass().getResourceAsStream("/com/tubes/edu/asset/tumbnail/Pilih Gambar.png"));
+            lihatGambar.setImage(tumbnail);
+            gambar = "no-image-available.jpg";
+        } else {
+            loadAnime();
+        }
+    }
+
+    private void loadAnime() {
+        this.anime = TubesSendingData.getAnime();
+        final Image tumbnail = new Image(getClass().getResourceAsStream("/com/tubes/edu/asset/tumbnail/" + anime.getGambar()));
+        final String[] genre = anime.getGenre().split(",");
+
+        judulTxt.setText(anime.getJudul());
+        sinopsisTxt.setText(anime.getSinopsis());
+        lihatGambar.setImage(tumbnail);
+        ratingTxt.setText(Double.toString(anime.getRating()));
+        jumlahEpTxt.setText(Integer.toString(anime.getJumlahEpisode()));
+        hasilMenuItem.setText(anime.getStatus());
+        durasiTxt.setText(Integer.toString(anime.getDurasi()));
+        cb[0] = genre1cb;
+        cb[1] = genre2cb;
+        cb[2] = genre3cb;
+        cb[3] = genre4cb;
+        cb[4] = genre5cb;
+        cb[5] = genre6cb;
+        cb[6] = genre7cb;
+        cb[7] = genre8cb;
+        cb[8] = genre9cb;
+        cb[9] = genre10cb;
+        cb[10] = genre11cb;
+        cb[11] = genre12cb;
+        cb[12] = genre13cb;
+        cb[13] = genre14cb;
+        cb[14] = genre15cb;
+        cb[15] = genre16cb;
+        cb[16] = genre17cb;
+        cb[17] = genre18cb;
+        cb[18] = genre19cb;
+        cb[19] = genre20cb;
+
+        for (String genre1 : genre) {
+            for (CheckBox cb1 : cb) {
+                if (genre1.toUpperCase().trim().equals(cb1.getText().toUpperCase())) {
+                    cb1.setSelected(true);
+                }
+            }
+        }
+
     }
 
     @FXML
@@ -390,7 +438,7 @@ public class CreateViewController implements Initializable {
     @FXML
     private void kembaliKehome(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        tube.changeStage(stage, "homeView");
+        tube.changeStage(stage, "AdminView");
 
     }
 }

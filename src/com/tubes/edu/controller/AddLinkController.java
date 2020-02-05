@@ -79,6 +79,7 @@ public class AddLinkController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         validasi = new TubesValidasi();
+        anime = new Anime();
 
         try {
             loadAnime();
@@ -179,6 +180,7 @@ public class AddLinkController implements Initializable {
         }
         if (validasi.validasiUrl(anime, texts)) {
             tube.insertAnime(anime);
+            System.out.println("Data berhasil disimpan");
             Anime newAnime = new Anime();
             if (tube.cariAnime(anime.getJudul())) {
                 newAnime = tube.getAnime();
@@ -195,7 +197,7 @@ public class AddLinkController implements Initializable {
             }
             AlertHelper.showAlert(Alert.AlertType.INFORMATION, null, "SUCCESS", "Data berhasil disimpan!");
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            tube.changeStage(stage, "homeView");
+            tube.changeStage(stage, "AdminView");
         } else {
             AlertHelper.showAlert(Alert.AlertType.ERROR, null, "Form Error!", "Opps.. Silahkan periksa kembali form url");
         }

@@ -22,21 +22,20 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class TubesEvent implements TubesInterface{
-    
+public class TubesEvent implements TubesInterface {
+
     private Connection conn;
     private Anime anime = new Anime();
     private Link link = new Link();
-    private User user = new User();   
-    
+    private User user = new User();
+
     public TubesEvent(Connection conn) {
         this.conn = conn;
     }
-    
-    
+
     @Override
     public void changeStage(Stage primaryStage, String source) throws IOException {
-        Parent fxml = FXMLLoader.load(getClass().getResource("/com/tubes/edu/view/"+source+".fxml"));
+        Parent fxml = FXMLLoader.load(getClass().getResource("/com/tubes/edu/view/" + source + ".fxml"));
         Scene scene = new Scene(fxml);
         primaryStage.setTitle("Ans");
         primaryStage.setScene(scene);
@@ -63,7 +62,7 @@ public class TubesEvent implements TubesInterface{
     @Override
     public boolean cariUser(String username) throws SQLException {
         boolean hasil = false;
-        final String query ="SELECT * FROM user WHERE username_user= ?";
+        final String query = "SELECT * FROM user WHERE username_user= ?";
         PreparedStatement st;
         try {
             st = conn.prepareStatement(query);
@@ -79,14 +78,14 @@ public class TubesEvent implements TubesInterface{
     @Override
     public boolean login(User user) throws SQLException {
         boolean hasil = false;
-        final String query ="SELECT * FROM user WHERE username_user= ? AND password_user = ?";
+        final String query = "SELECT * FROM user WHERE username_user= ? AND password_user = ?";
         PreparedStatement st;
         try {
             st = conn.prepareStatement(query);
             st.setString(1, user.getUsername());
             st.setString(2, user.getPassword());
             ResultSet resultSet = st.executeQuery();
-            while(resultSet.next())  {
+            while (resultSet.next()) {
                 this.user.setNama(resultSet.getString("nama_user"));
                 this.user.setUsername(resultSet.getString("username_user"));
                 this.user.setPassword(resultSet.getString("password_user"));
@@ -97,7 +96,7 @@ public class TubesEvent implements TubesInterface{
             printSQLException(e);
         }
         return hasil;
-        
+
     }
 
     @Override
@@ -105,7 +104,7 @@ public class TubesEvent implements TubesInterface{
         Statement st = null;
         List<Anime> list = new ArrayList<>();
         final String query = "SELECT * FROM anime";
-        
+
         try {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -114,7 +113,7 @@ public class TubesEvent implements TubesInterface{
                 anim = new Anime();
                 anim.setId(rs.getInt("id_anime"));
                 anim.setJudul(rs.getString("judul_anime"));
-                anim.setJumlahEpisode(rs.getInt("jumlah_episode"));                
+                anim.setJumlahEpisode(rs.getInt("jumlah_episode"));
                 anim.setRating(rs.getDouble("rating_anime"));
                 anim.setGambar(rs.getString("gambar_anime"));
                 anim.setSinopsis(rs.getString("sinopsis_anime"));
@@ -126,7 +125,7 @@ public class TubesEvent implements TubesInterface{
         } catch (SQLException e) {
             printSQLException(e);
         } finally {
-            if(st != null) {
+            if (st != null) {
                 try {
                     st.close();
                 } catch (SQLException exception) {
@@ -140,7 +139,7 @@ public class TubesEvent implements TubesInterface{
     public User getUSer() {
         return this.user;
     }
-        
+
     public static void printSQLException(SQLException ex) {
         for (Throwable e : ex) {
             if (e instanceof SQLException) {
@@ -174,7 +173,7 @@ public class TubesEvent implements TubesInterface{
             while (rs.next()) {
                 this.anime.setId(rs.getInt("id_anime"));
                 this.anime.setJudul(rs.getString("judul_anime"));
-                this.anime.setJumlahEpisode(rs.getInt("jumlah_episode"));                
+                this.anime.setJumlahEpisode(rs.getInt("jumlah_episode"));
                 this.anime.setRating(rs.getDouble("rating_anime"));
                 this.anime.setGambar(rs.getString("gambar_anime"));
                 this.anime.setSinopsis(rs.getString("sinopsis_anime"));
@@ -185,18 +184,40 @@ public class TubesEvent implements TubesInterface{
             }
         } catch (SQLException e) {
         }
-        
+
         return hasil;
     }
 
     @Override
     public boolean cariAnime(int idAnime) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean hasil = false;
+        final String query = "SELECT * FROM anime WHERE id_anime= ?";
+        PreparedStatement st = null;
+        try {
+            st = conn.prepareStatement(query);
+            st.setInt(1, idAnime);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                this.anime.setId(rs.getInt("id_anime"));
+                this.anime.setJudul(rs.getString("judul_anime"));
+                this.anime.setJumlahEpisode(rs.getInt("jumlah_episode"));
+                this.anime.setRating(rs.getDouble("rating_anime"));
+                this.anime.setGambar(rs.getString("gambar_anime"));
+                this.anime.setSinopsis(rs.getString("sinopsis_anime"));
+                this.anime.setDurasi(rs.getInt("durasi_anime"));
+                this.anime.setStatus(rs.getString("status"));
+                this.anime.setGenre(rs.getString("genre_anime"));
+                hasil = true;
+            }
+        } catch (SQLException e) {
+        }
+
+        return hasil;
     }
 
     @Override
     public boolean cariLink(Anime anime, int episode) throws SQLException {
-         boolean hasil = false;
+        boolean hasil = false;
         PreparedStatement st = null;
         final String query = "SELECT * FROM streaming WHERE id_anime= ? AND episode_streaming = ?";
         try {
@@ -204,7 +225,7 @@ public class TubesEvent implements TubesInterface{
             st.setInt(1, anime.getId());
             st.setInt(2, episode);
             ResultSet rs = st.executeQuery();
-            while(rs.next()) {
+            while (rs.next()) {
                 this.link.setEpisode(rs.getInt("episode_streaming"));
                 this.link.setIdAnime(rs.getInt("id_anime"));
                 this.link.setIdStreaming(rs.getInt("id_streaming"));
@@ -241,7 +262,7 @@ public class TubesEvent implements TubesInterface{
         } catch (SQLException e) {
             printSQLException(e);
         } finally {
-            if(st != null) {
+            if (st != null) {
                 try {
                     st.close();
                 } catch (SQLException exception) {
@@ -250,34 +271,36 @@ public class TubesEvent implements TubesInterface{
         }
         return list;
     }
+
     protected boolean cekNext(Link link) throws SQLException {
         boolean hasil = false;
         PreparedStatement st = null;
         final String query = "SELECT * FROM streaming WHERE id_anime= ? AND episode_streaming = ?";
-        int episode = link.getEpisode()+1;
+        int episode = link.getEpisode() + 1;
         try {
             st = conn.prepareStatement(query);
             st.setInt(1, link.getIdAnime());
             st.setInt(2, episode);
             ResultSet rs = st.executeQuery();
-            while(rs.next()) {       
+            while (rs.next()) {
                 hasil = true;
             }
         } catch (SQLException e) {
         }
         return hasil;
     }
+
     protected boolean cekPrev(Link link) throws SQLException {
         boolean hasil = false;
         PreparedStatement st = null;
         final String query = "SELECT * FROM streaming WHERE id_anime= ? AND episode_streaming = ?";
-        int episode = link.getEpisode()-1;
+        int episode = link.getEpisode() - 1;
         try {
             st = conn.prepareStatement(query);
             st.setInt(1, link.getIdAnime());
             st.setInt(2, episode);
             ResultSet rs = st.executeQuery();
-            while(rs.next()) {
+            while (rs.next()) {
                 hasil = true;
             }
         } catch (SQLException e) {
@@ -308,7 +331,7 @@ public class TubesEvent implements TubesInterface{
             st.executeUpdate();
         } catch (SQLException e) {
         }
-        
+
     }
 
     @Override
@@ -322,6 +345,59 @@ public class TubesEvent implements TubesInterface{
             st.setInt(3, link.getEpisode());
             st.setString(4, link.getUrlStreaming());
             st.executeUpdate();
+        } catch (SQLException e) {
+        }
+    }
+
+    @Override
+    public void updateAnime(Anime anime) throws SQLException {
+        final String query = "UPDATE anime SET judul_anime = ?, jumlah_episode = ?, rating_anime = ?, gambar_anime = ?, sinopsis_anime = ?, durasi_anime = ?, status = ?, genre_anime = ? WHERE id_anime=?";
+        PreparedStatement st = null;
+        try {
+            st = conn.prepareStatement(query);
+            st.setString(1, anime.getJudul());
+            st.setInt(2, anime.getJumlahEpisode());
+            st.setDouble(3, anime.getRating());
+            st.setString(4, anime.getGambar());
+            st.setString(5, anime.getSinopsis());
+            st.setInt(6, anime.getDurasi());
+            st.setString(7, anime.getStatus());
+            st.setString(8, anime.getGenre());
+            st.setInt(9, anime.getId());
+            st.executeUpdate();
+        } catch (SQLException e) {
+        }
+    }
+
+    @Override
+    public void updateLink(Link link) throws SQLException {
+        final String query = "UPDATE anime SET url_streaming WHERE id_streaming = ?";
+        PreparedStatement st = null;
+        try {
+            st = conn.prepareStatement(query);
+            st.setString(1, link.getUrlStreaming());
+            st.setInt(2, link.getIdStreaming());
+            st.executeUpdate();
+        } catch (SQLException e) {
+        }
+    }
+
+    @Override
+    public void deleteAnime(Anime anime) throws SQLException {
+        final String query = "DELETE FROM streaming WHERE id_anime = ?";
+        PreparedStatement st = null;
+        try {
+            st = conn.prepareStatement(query);
+            st.setInt(1, anime.getId());
+            st.executeUpdate();
+        } catch (SQLException e) {
+        }
+        final String query2 = "DELETE FROM anime WHERE id_anime = ?";
+        PreparedStatement st2 = null;
+        try {
+            st2 = conn.prepareStatement(query2);
+            st2.setInt(1, anime.getId());
+            st2.executeUpdate();
         } catch (SQLException e) {
         }
     }
